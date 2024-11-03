@@ -43,17 +43,17 @@ public abstract class User {
     private Boolean disabled;
 
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users",fetch = FetchType.EAGER)
     List<Comment> comments;
 
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users" ,fetch = FetchType.EAGER)
     List<Publication> publications;
 
     @ManyToOne
     private City cities;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" )
     private List<Reaction> reactions;
 
     @Transient
