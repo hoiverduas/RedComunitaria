@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RequestEntrepreneurDTO {
 
+    private  Long id;
     private String username;
     private String password;
     private String email;
@@ -19,5 +20,5 @@ public class RequestEntrepreneurDTO {
     private String contact;
     private String fullName;
     private Specialty specialty;
-
+    private Long cityId;
 }

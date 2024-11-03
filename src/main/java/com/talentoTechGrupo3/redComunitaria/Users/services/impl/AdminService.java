@@ -1,7 +1,10 @@
 package com.talentoTechGrupo3.redComunitaria.Users.services.impl;
 
+import com.talentoTechGrupo3.redComunitaria.Users.dto.RequestAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.Users.entities.Admin;
+import com.talentoTechGrupo3.redComunitaria.Users.entities.City;
 import com.talentoTechGrupo3.redComunitaria.Users.repositories.IAdminRepository;
+import com.talentoTechGrupo3.redComunitaria.Users.repositories.ICityRepository;
 import com.talentoTechGrupo3.redComunitaria.Users.services.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,15 +16,34 @@ import java.util.Optional;
 public class AdminService implements IAdminService {
 
     private final IAdminRepository adminRepository;
+    private final ICityRepository cityRepository;
 
     @Autowired
-    public AdminService(IAdminRepository adminRepository) {
+    public AdminService(IAdminRepository adminRepository, ICityRepository cityRepository) {
         this.adminRepository = adminRepository;
+        this.cityRepository = cityRepository;
     }
 
 
     @Override
-    public Admin createAdmin(Admin admin) {
+    public Admin createAdmin(RequestAdminDTO requestAdminDTO) {
+
+        Long cityId = requestAdminDTO.getCityId();
+        City city = cityRepository
+                .findById(cityId)
+                .orElseThrow(()->new RuntimeException("Not Found"));
+
+        Admin admin = new Admin();
+        admin.setId(requestAdminDTO.getId());
+        admin.setUsername(requestAdminDTO.getUsername());
+        admin.setPassword(requestAdminDTO.getPassword());
+        admin.setEmail(requestAdminDTO.getEmail());
+        admin.setLocked(requestAdminDTO.getLocked());
+        admin.setDisabled(requestAdminDTO.getDisabled());
+        admin.setAccessLevel(requestAdminDTO.getAccessLevel());
+        admin.setAreaOfResponsibility(requestAdminDTO.getAreaOfResponsibility());
+        admin.setCities(city);
+
         return this.adminRepository.save(admin);
     }
 
@@ -39,21 +61,21 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public Admin updateAdmin(Admin admin) {
+    public Admin updateAdmin(RequestAdminDTO requestAdminDTO) {
 
-        Optional<Admin> optionalAdmin = findById(admin.getId());
+        Optional<Admin> optionalAdmin = findById(requestAdminDTO.getId());
 
         if (optionalAdmin.isPresent()){
 
             Admin existAdmin = optionalAdmin.get();
 
-            existAdmin.setUsername(admin.getUsername());
-            existAdmin.setPassword(admin.getPassword());
-            existAdmin.setEmail(admin.getUsername());
-            existAdmin.setDisabled(admin.getDisabled());
-            existAdmin.setLocked(admin.getLocked());
-            existAdmin.setAccessLevel(admin.getAccessLevel());
-            existAdmin.setAreaOfResponsibility(admin.getAreaOfResponsibility());
+            existAdmin.setUsername(requestAdminDTO.getUsername());
+            existAdmin.setPassword(requestAdminDTO.getPassword());
+            existAdmin.setEmail(requestAdminDTO.getUsername());
+            existAdmin.setDisabled(requestAdminDTO.getDisabled());
+            existAdmin.setLocked(requestAdminDTO.getLocked());
+            existAdmin.setAccessLevel(requestAdminDTO.getAccessLevel());
+            existAdmin.setAreaOfResponsibility(requestAdminDTO.getAreaOfResponsibility());
 
             return this.adminRepository.save(existAdmin);
         }else {
