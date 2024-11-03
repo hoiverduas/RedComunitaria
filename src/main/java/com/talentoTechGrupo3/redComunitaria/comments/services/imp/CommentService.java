@@ -3,11 +3,11 @@ package com.talentoTechGrupo3.redComunitaria.comments.services.imp;
 import com.talentoTechGrupo3.redComunitaria.comments.dto.CommentDTO;
 import com.talentoTechGrupo3.redComunitaria.comments.entities.Comment;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Publication;
-import com.talentoTechGrupo3.redComunitaria.Users.entities.User;
-import com.talentoTechGrupo3.redComunitaria.Users.repositories.IAdminRepository;
+import com.talentoTechGrupo3.redComunitaria.users.entities.User;
+import com.talentoTechGrupo3.redComunitaria.users.repositories.IAdminRepository;
 import com.talentoTechGrupo3.redComunitaria.comments.repository.ICommentRepository;
 import com.talentoTechGrupo3.redComunitaria.publications.repositories.IPublicationRepository;
-import com.talentoTechGrupo3.redComunitaria.Users.repositories.IUserRepository;
+import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.comments.services.ICommentService;
 import org.springframework.stereotype.Service;
 

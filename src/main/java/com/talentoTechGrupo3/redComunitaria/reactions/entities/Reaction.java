@@ -1,7 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.reactions.entities;
 
 
-import com.talentoTechGrupo3.redComunitaria.Users.entities.User;
+import com.talentoTechGrupo3.redComunitaria.users.entities.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

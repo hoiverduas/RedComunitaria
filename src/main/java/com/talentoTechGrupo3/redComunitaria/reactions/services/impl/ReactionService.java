@@ -7,13 +7,13 @@ import com.talentoTechGrupo3.redComunitaria.comments.entities.CommentReaction;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.PublicationReaction;
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.Reaction;
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.ReactionType;
-import com.talentoTechGrupo3.redComunitaria.Users.entities.User;
+import com.talentoTechGrupo3.redComunitaria.users.entities.User;
 import com.talentoTechGrupo3.redComunitaria.comments.repository.ICommentReactionRepository;
 import com.talentoTechGrupo3.redComunitaria.comments.repository.ICommentRepository;
 import com.talentoTechGrupo3.redComunitaria.publications.repositories.IPublicationReactionRepository;
 import com.talentoTechGrupo3.redComunitaria.publications.repositories.IPublicationRepository;
 import com.talentoTechGrupo3.redComunitaria.reactions.repositories.IReactionRepository;
-import com.talentoTechGrupo3.redComunitaria.Users.repositories.IUserRepository;
+import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.reactions.services.IReactionService;
 import org.springframework.stereotype.Service;
 
