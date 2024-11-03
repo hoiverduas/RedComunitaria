@@ -4,13 +4,11 @@ package com.talentoTechGrupo3.redComunitaria.controller;
 import com.talentoTechGrupo3.redComunitaria.dto.ReactionCommentDTO;
 import com.talentoTechGrupo3.redComunitaria.dto.ReactionPublicationDTO;
 import com.talentoTechGrupo3.redComunitaria.entities.Reaction;
+import com.talentoTechGrupo3.redComunitaria.entities.ReactionType;
 import com.talentoTechGrupo3.redComunitaria.services.impl.ReactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/reactions")
@@ -23,11 +21,13 @@ public class ReactionController {
     }
 
     @PostMapping("/publication")
-    public ResponseEntity<Reaction> createReactionPublication(@RequestBody ReactionPublicationDTO reactionPublicationDTO){
+    public ResponseEntity<Reaction> createReactionPublication(@RequestParam ReactionType reactionType,
+                                                              @RequestParam Long userId,
+                                                              @RequestParam Long publicationId ){
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(this.reactionService.createReactionPublication(reactionPublicationDTO));
+                    .body(this.reactionService.createReactionPublication(userId,publicationId,reactionType));
         }catch (RuntimeException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
@@ -37,12 +37,14 @@ public class ReactionController {
     }
 
     @PostMapping("/comment")
-    public ResponseEntity<Reaction> createReactionComment(@RequestBody ReactionCommentDTO reactionCommentDTO){
+    public ResponseEntity<Reaction> createReactionComment(@RequestParam Long userId,
+                                                          @RequestParam Long commentId,
+                                                          @RequestParam ReactionType reactionType){
 
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(this.reactionService.createReactionComment(reactionCommentDTO));
+                    .body(this.reactionService.createReactionComment(userId,commentId,reactionType));
         }catch (RuntimeException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)

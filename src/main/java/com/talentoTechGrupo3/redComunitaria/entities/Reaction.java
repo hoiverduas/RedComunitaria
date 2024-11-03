@@ -6,25 +6,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "reaction_category")
 @Table(name = "reactions")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reaction {
+public abstract class Reaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated(EnumType.STRING)
-    private ReactionType reactionType = ReactionType.REACTION_TYPE; // Valor por defecto
+    private ReactionType reactionType;
 
-    @ManyToOne
-    private Comment comment;
-
-    @ManyToOne
-    private Publication publication;
-
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
+
 }

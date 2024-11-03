@@ -38,5 +38,5 @@ public class Comment  {
     private Publication publication;
 
     @OneToMany(mappedBy = "comment")
-    private List<Reaction>reactions;
+    private List<CommentReaction> commentReactions;
 }

@@ -44,9 +44,5 @@ public abstract class Publication {
     @OneToMany(mappedBy = "publication")
     List<Comment>comments;
 
-    @OneToMany(mappedBy = "publication")
-    private List<Reaction>reactions;
-
-
 
 }

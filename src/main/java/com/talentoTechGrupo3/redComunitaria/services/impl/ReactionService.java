@@ -1,13 +1,8 @@
 package com.talentoTechGrupo3.redComunitaria.services.impl;
 
 
-import com.talentoTechGrupo3.redComunitaria.dto.ReactionCommentDTO;
-import com.talentoTechGrupo3.redComunitaria.dto.ReactionPublicationDTO;
 import com.talentoTechGrupo3.redComunitaria.entities.*;
-import com.talentoTechGrupo3.redComunitaria.respositories.ICommentRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IPublicationRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IReactionRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IUserRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.*;
 import com.talentoTechGrupo3.redComunitaria.services.IReactionService;
 import org.springframework.stereotype.Service;
 
@@ -22,55 +17,70 @@ public class ReactionService implements IReactionService {
 
     private final ICommentRepository commentRepository;
 
-    public ReactionService(IReactionRepository reactionRepository, IUserRepository userRepository, IPublicationRepository publicationRepository, ICommentRepository commentRepository) {
+    private final IPublicationReactionRepository publicationReactionRepository;
+
+    private final ICommentReactionRepository commentReactionRepository;
+
+    public ReactionService(IReactionRepository reactionRepository,
+                           IUserRepository userRepository,
+                           IPublicationRepository publicationRepository,
+                           ICommentRepository commentRepository,
+                           IPublicationReactionRepository publicationReactionRepository,
+                           ICommentReactionRepository commentReactionRepository) {
+
         this.reactionRepository = reactionRepository;
         this.userRepository = userRepository;
         this.publicationRepository = publicationRepository;
         this.commentRepository = commentRepository;
+        this.publicationReactionRepository = publicationReactionRepository;
+        this.commentReactionRepository = commentReactionRepository;
     }
 
 
     @Override
-    public Reaction createReactionPublication(ReactionPublicationDTO reactionPublicationDTO) {
+    public Reaction createReactionPublication(Long userId,
+                                              Long publicationId,
+                                              ReactionType reactionType) {
 
-
-        Long userId = reactionPublicationDTO.getUserId();
         User user = userRepository
                 .findById(userId)
                 .orElseThrow(()->new RuntimeException("Not Found"));
 
-        Long publicationId = reactionPublicationDTO.getPublicationId();
         Publication publication = publicationRepository
                 .findById(publicationId)
-                .orElseThrow(()-> new RuntimeException("Not Found"));
+                .orElseThrow(()->new RuntimeException("Not Found"));
 
-        Reaction reaction = new Reaction();
+        PublicationReaction publicationReaction = new PublicationReaction();
 
-        reaction.setUser(user);
-        reaction.setPublication(publication);
-        reaction.setReactionType(reactionPublicationDTO.getReactionType());
+        publicationReaction.setUser(user);
+        publicationReaction.setPublication(publication);
+        publicationReaction.setReactionType(reactionType);
 
-        return this.reactionRepository.save(reaction);
+        return this.publicationReactionRepository.save(publicationReaction);
+
     }
 
     @Override
-    public Reaction createReactionComment(ReactionCommentDTO reactionCommentDTO) {
+    public Reaction createReactionComment(Long userId, Long commentId, ReactionType reactionType) {
 
-          Long userId = reactionCommentDTO.getUserId();
-          User user = userRepository
-                  .findById(userId)
-                  .orElseThrow(()->new RuntimeException("Not Found"));
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(()->new RuntimeException("Not Found"));
 
-          Long commentId = reactionCommentDTO.getCommentId();
-          Comment comment = commentRepository
-                  .findById(commentId).orElseThrow(()->new RuntimeException("Not Found"));
+        Comment comment = commentRepository
+                .findById(commentId)
+                .orElseThrow(()->new RuntimeException("Not Found"));
 
-          Reaction reaction = new Reaction();
+        CommentReaction commentReaction = new CommentReaction();
 
-          reaction.setReactionType(reactionCommentDTO.getReactionType());
-          reaction.setComment(comment);
-          reaction.setUser(user);
+        commentReaction.setComment(comment);
+        commentReaction.setUser(user);
+        commentReaction.setReactionType(reactionType);
 
-        return this.reactionRepository.save(reaction);
+        return this.commentReactionRepository.save(commentReaction);
     }
+
+
+
+
 }
