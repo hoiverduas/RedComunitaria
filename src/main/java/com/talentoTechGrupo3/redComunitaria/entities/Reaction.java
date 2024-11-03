@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "reaction_category")
-@Table(name = "reactions")
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

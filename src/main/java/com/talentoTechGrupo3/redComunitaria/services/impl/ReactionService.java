@@ -6,6 +6,12 @@ import com.talentoTechGrupo3.redComunitaria.respositories.*;
 import com.talentoTechGrupo3.redComunitaria.services.IReactionService;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.OpenOption;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Service
 public class ReactionService implements IReactionService {
 
@@ -44,11 +50,11 @@ public class ReactionService implements IReactionService {
 
         User user = userRepository
                 .findById(userId)
-                .orElseThrow(()->new RuntimeException("Not Found"));
+                .orElseThrow(() -> new RuntimeException("Not Found"));
 
         Publication publication = publicationRepository
                 .findById(publicationId)
-                .orElseThrow(()->new RuntimeException("Not Found"));
+                .orElseThrow(() -> new RuntimeException("Not Found"));
 
         PublicationReaction publicationReaction = new PublicationReaction();
 
@@ -65,11 +71,11 @@ public class ReactionService implements IReactionService {
 
         User user = userRepository
                 .findById(userId)
-                .orElseThrow(()->new RuntimeException("Not Found"));
+                .orElseThrow(() -> new RuntimeException("Not Found"));
 
         Comment comment = commentRepository
                 .findById(commentId)
-                .orElseThrow(()->new RuntimeException("Not Found"));
+                .orElseThrow(() -> new RuntimeException("Not Found"));
 
         CommentReaction commentReaction = new CommentReaction();
 
@@ -80,7 +86,27 @@ public class ReactionService implements IReactionService {
         return this.commentReactionRepository.save(commentReaction);
     }
 
+    @Override
+    public void deleteReaction(Long id) {
+
+        commentReactionRepository.findById(id)
+                .ifPresentOrElse(
+                        commentReactionRepository::delete,
+                        // Si no existe, intenta eliminar una PublicationReaction
+                        () -> publicationReactionRepository.findById(id).ifPresent(publicationReactionRepository::delete)
+                );
+    }
+
+    @Override
+    public List<Reaction> findByReactionByUser(Long userId) {
+        // Buscar reacciones del usuario en ambos repositorios
+        List<CommentReaction> commentReactions = commentReactionRepository.findByUserId(userId);
+        List<PublicationReaction> publicationReactions = publicationReactionRepository.findByUserId(userId);
+        // Combinar las listas en una sola
+        return Stream.concat(commentReactions.stream(), publicationReactions.stream())
+                .collect(Collectors.toList());
 
 
+    }
 
 }

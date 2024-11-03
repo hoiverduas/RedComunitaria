@@ -5,10 +5,14 @@ import com.talentoTechGrupo3.redComunitaria.dto.ReactionCommentDTO;
 import com.talentoTechGrupo3.redComunitaria.dto.ReactionPublicationDTO;
 import com.talentoTechGrupo3.redComunitaria.entities.Reaction;
 import com.talentoTechGrupo3.redComunitaria.entities.ReactionType;
+import com.talentoTechGrupo3.redComunitaria.entities.User;
 import com.talentoTechGrupo3.redComunitaria.services.impl.ReactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/reactions")
@@ -52,4 +56,31 @@ public class ReactionController {
         }
 
     }
+
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Reaction>> findByReactionByUser(@PathVariable Long userId){
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(this.reactionService.findByReactionByUser(userId));
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build();
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteReaction(@PathVariable Long id){
+       try {
+           this.reactionService.deleteReaction(id);
+           return ResponseEntity
+                   .status(HttpStatus.CREATED).build();
+       }catch (RuntimeException e){
+           return ResponseEntity
+                   .status(HttpStatus.NOT_FOUND).build();
+       }
+    }
+
 }
