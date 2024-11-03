@@ -1,13 +1,13 @@
 package com.talentoTechGrupo3.redComunitaria.services.impl;
 
 import com.talentoTechGrupo3.redComunitaria.dto.CommentDTO;
-import com.talentoTechGrupo3.redComunitaria.entities.Comment;
-import com.talentoTechGrupo3.redComunitaria.entities.Publication;
-import com.talentoTechGrupo3.redComunitaria.entities.User;
-import com.talentoTechGrupo3.redComunitaria.respositories.IAdminRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.ICommentRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IPublicationRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IUserRepository;
+import com.talentoTechGrupo3.redComunitaria.entities.commentEntities.Comment;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Publication;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.User;
+import com.talentoTechGrupo3.redComunitaria.respositories.userRepositories.IAdminRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.commentRepositories.ICommentRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.publicationRepositories.IPublicationRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.userRepositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.services.ICommentService;
 import org.springframework.stereotype.Service;
 

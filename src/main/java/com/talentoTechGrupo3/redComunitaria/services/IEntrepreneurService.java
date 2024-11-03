@@ -1,7 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.services;
 
-import com.talentoTechGrupo3.redComunitaria.entities.Comment;
-import com.talentoTechGrupo3.redComunitaria.entities.Entrepreneur;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.Entrepreneur;
 
 import java.util.List;
 import java.util.Optional;

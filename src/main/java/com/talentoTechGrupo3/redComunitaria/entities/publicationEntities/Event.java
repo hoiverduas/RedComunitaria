@@ -1,4 +1,4 @@
-package com.talentoTechGrupo3.redComunitaria.entities;
+package com.talentoTechGrupo3.redComunitaria.entities.publicationEntities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Event extends Publication{
+public class Event extends Publication {
 
 
     private String name;

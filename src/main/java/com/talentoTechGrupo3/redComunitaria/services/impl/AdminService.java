@@ -1,7 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.services.impl;
 
-import com.talentoTechGrupo3.redComunitaria.entities.Admin;
-import com.talentoTechGrupo3.redComunitaria.respositories.IAdminRepository;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.Admin;
+import com.talentoTechGrupo3.redComunitaria.respositories.userRepositories.IAdminRepository;
 import com.talentoTechGrupo3.redComunitaria.services.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,10 @@
-package com.talentoTechGrupo3.redComunitaria.entities;
+package com.talentoTechGrupo3.redComunitaria.entities.publicationEntities;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.talentoTechGrupo3.redComunitaria.entities.commentEntities.Comment;
+import com.talentoTechGrupo3.redComunitaria.entities.reactioEntities.ReactionType;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

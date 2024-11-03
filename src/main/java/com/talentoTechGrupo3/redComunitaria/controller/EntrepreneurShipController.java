@@ -2,7 +2,7 @@ package com.talentoTechGrupo3.redComunitaria.controller;
 
 
 import com.talentoTechGrupo3.redComunitaria.dto.CreateEntrepreneurshipDTO;
-import com.talentoTechGrupo3.redComunitaria.entities.Entrepreneurship;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Entrepreneurship;
 import com.talentoTechGrupo3.redComunitaria.services.impl.EntrepreneurshipService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

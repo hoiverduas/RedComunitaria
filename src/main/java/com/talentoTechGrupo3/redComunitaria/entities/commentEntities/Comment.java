@@ -1,7 +1,10 @@
-package com.talentoTechGrupo3.redComunitaria.entities;
+package com.talentoTechGrupo3.redComunitaria.entities.commentEntities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Publication;
+import com.talentoTechGrupo3.redComunitaria.entities.reactioEntities.ReactionType;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +30,7 @@ public class Comment  {
     private String content;
 
     @Enumerated(EnumType.STRING)
-    private  ReactionType reactionType;
+    private ReactionType reactionType;
 
     @JsonIgnore
     @ManyToOne

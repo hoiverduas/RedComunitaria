@@ -1,4 +1,4 @@
-package com.talentoTechGrupo3.redComunitaria.entities;
+package com.talentoTechGrupo3.redComunitaria.entities.userEntities;
 
 public enum AreaOfResponsibility {
 

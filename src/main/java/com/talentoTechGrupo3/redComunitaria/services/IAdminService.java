@@ -1,6 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.services;
 
-import com.talentoTechGrupo3.redComunitaria.entities.Admin;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.Admin;
 
 import java.util.List;
 import java.util.Optional;

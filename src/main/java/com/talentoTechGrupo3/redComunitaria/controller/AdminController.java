@@ -1,6 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.controller;
 
-import com.talentoTechGrupo3.redComunitaria.entities.Admin;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.Admin;
 import com.talentoTechGrupo3.redComunitaria.services.impl.AdminService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

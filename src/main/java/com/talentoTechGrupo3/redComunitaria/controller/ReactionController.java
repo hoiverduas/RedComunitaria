@@ -1,18 +1,14 @@
 package com.talentoTechGrupo3.redComunitaria.controller;
 
 
-import com.talentoTechGrupo3.redComunitaria.dto.ReactionCommentDTO;
-import com.talentoTechGrupo3.redComunitaria.dto.ReactionPublicationDTO;
-import com.talentoTechGrupo3.redComunitaria.entities.Reaction;
-import com.talentoTechGrupo3.redComunitaria.entities.ReactionType;
-import com.talentoTechGrupo3.redComunitaria.entities.User;
+import com.talentoTechGrupo3.redComunitaria.entities.reactioEntities.Reaction;
+import com.talentoTechGrupo3.redComunitaria.entities.reactioEntities.ReactionType;
 import com.talentoTechGrupo3.redComunitaria.services.impl.ReactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/reactions")

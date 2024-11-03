@@ -1,9 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.services.impl;
 
-import com.talentoTechGrupo3.redComunitaria.entities.Comment;
-import com.talentoTechGrupo3.redComunitaria.entities.Entrepreneur;
-import com.talentoTechGrupo3.redComunitaria.respositories.ICommentRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IEntrepreneurRepository;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.Entrepreneur;
+import com.talentoTechGrupo3.redComunitaria.respositories.userRepositories.IEntrepreneurRepository;
 import com.talentoTechGrupo3.redComunitaria.services.IEntrepreneurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

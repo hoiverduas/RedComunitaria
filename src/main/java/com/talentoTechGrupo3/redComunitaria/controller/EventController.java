@@ -2,10 +2,9 @@ package com.talentoTechGrupo3.redComunitaria.controller;
 
 
 import com.talentoTechGrupo3.redComunitaria.dto.CreateEventDTO;
-import com.talentoTechGrupo3.redComunitaria.entities.Event;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Event;
 import com.talentoTechGrupo3.redComunitaria.services.impl.EventService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

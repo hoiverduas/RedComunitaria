@@ -1,11 +1,10 @@
 package com.talentoTechGrupo3.redComunitaria.services.impl;
 
 import com.talentoTechGrupo3.redComunitaria.dto.CreateEventDTO;
-import com.talentoTechGrupo3.redComunitaria.entities.Event;
-import com.talentoTechGrupo3.redComunitaria.entities.ReactionType;
-import com.talentoTechGrupo3.redComunitaria.entities.User;
-import com.talentoTechGrupo3.redComunitaria.respositories.IEventRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IUserRepository;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Event;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.User;
+import com.talentoTechGrupo3.redComunitaria.respositories.publicationRepositories.IEventRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.userRepositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.services.IEventService;
 import org.springframework.stereotype.Service;
 

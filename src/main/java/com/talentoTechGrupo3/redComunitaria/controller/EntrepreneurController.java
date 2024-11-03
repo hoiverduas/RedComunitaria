@@ -1,7 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.controller;
 
 
-import com.talentoTechGrupo3.redComunitaria.entities.Entrepreneur;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.Entrepreneur;
 import com.talentoTechGrupo3.redComunitaria.services.impl.EntrepreneurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

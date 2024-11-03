@@ -1,12 +1,13 @@
-package com.talentoTechGrupo3.redComunitaria.entities;
+package com.talentoTechGrupo3.redComunitaria.entities.publicationEntities;
 
 
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Publication;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.TypeSector;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

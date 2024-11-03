@@ -1,14 +1,23 @@
 package com.talentoTechGrupo3.redComunitaria.services.impl;
 
 
-import com.talentoTechGrupo3.redComunitaria.entities.*;
-import com.talentoTechGrupo3.redComunitaria.respositories.*;
+import com.talentoTechGrupo3.redComunitaria.entities.commentEntities.Comment;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Publication;
+import com.talentoTechGrupo3.redComunitaria.entities.commentEntities.CommentReaction;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.PublicationReaction;
+import com.talentoTechGrupo3.redComunitaria.entities.reactioEntities.Reaction;
+import com.talentoTechGrupo3.redComunitaria.entities.reactioEntities.ReactionType;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.User;
+import com.talentoTechGrupo3.redComunitaria.respositories.commentRepositories.ICommentReactionRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.commentRepositories.ICommentRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.publicationRepositories.IPublicationReactionRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.publicationRepositories.IPublicationRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.reactionRepositories.IReactionRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.userRepositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.services.IReactionService;
 import org.springframework.stereotype.Service;
 
-import java.nio.file.OpenOption;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

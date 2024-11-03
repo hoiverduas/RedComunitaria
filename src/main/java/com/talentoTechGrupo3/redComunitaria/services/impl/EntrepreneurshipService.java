@@ -1,9 +1,9 @@
 package com.talentoTechGrupo3.redComunitaria.services.impl;
 import com.talentoTechGrupo3.redComunitaria.dto.CreateEntrepreneurshipDTO;
-import com.talentoTechGrupo3.redComunitaria.entities.Entrepreneurship;
-import com.talentoTechGrupo3.redComunitaria.entities.User;
-import com.talentoTechGrupo3.redComunitaria.respositories.IEntrepreneurshipRepository;
-import com.talentoTechGrupo3.redComunitaria.respositories.IUserRepository;
+import com.talentoTechGrupo3.redComunitaria.entities.publicationEntities.Entrepreneurship;
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.User;
+import com.talentoTechGrupo3.redComunitaria.respositories.publicationRepositories.IEntrepreneurshipRepository;
+import com.talentoTechGrupo3.redComunitaria.respositories.userRepositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.services.IEntrepreneurshipService;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;

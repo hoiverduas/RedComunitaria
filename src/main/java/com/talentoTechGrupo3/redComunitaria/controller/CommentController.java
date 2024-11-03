@@ -1,7 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.controller;
 
 import com.talentoTechGrupo3.redComunitaria.dto.CommentDTO;
-import com.talentoTechGrupo3.redComunitaria.entities.Comment;
+import com.talentoTechGrupo3.redComunitaria.entities.commentEntities.Comment;
 import com.talentoTechGrupo3.redComunitaria.services.impl.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.dto;
 
-import com.talentoTechGrupo3.redComunitaria.entities.ReactionType;
+import com.talentoTechGrupo3.redComunitaria.entities.reactioEntities.ReactionType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
-package com.talentoTechGrupo3.redComunitaria.entities;
+package com.talentoTechGrupo3.redComunitaria.entities.userEntities;
 
+import com.talentoTechGrupo3.redComunitaria.entities.userEntities.City;
 import jakarta.persistence.*;
 
 import java.util.List;
