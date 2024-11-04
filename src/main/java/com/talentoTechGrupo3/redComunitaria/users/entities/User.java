@@ -52,16 +52,13 @@ public abstract class User {
 
 
     @OneToMany(mappedBy = "users",fetch = FetchType.LAZY)
-    @JsonManagedReference
     List<Comment> comments;
 
 
     @OneToMany(mappedBy = "users" ,fetch = FetchType.LAZY)
-    @JsonManagedReference
     List<Publication> publications;
 
     @ManyToOne
-    @JsonManagedReference
     private City cities;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)

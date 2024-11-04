@@ -1,6 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.users.controller;
 
 import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.RequestAdminDTO;
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.ResponseAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Admin;
 import com.talentoTechGrupo3.redComunitaria.users.services.impl.AdminService;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,14 @@ public class AdminController {
     }
 
     @PostMapping
-    public ResponseEntity<Admin> createAdmin(@RequestBody RequestAdminDTO requestAdminDTO){
+    public ResponseEntity<ResponseAdminDTO> createAdmin(@RequestBody RequestAdminDTO requestAdminDTO){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.adminService.createAdmin(requestAdminDTO));
     }
+
     @GetMapping
-    public ResponseEntity<List<Admin>> getAdminAll(){
+    public ResponseEntity<List<ResponseAdminDTO>> getAdminAll(){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.adminService.findAll());
@@ -42,10 +44,10 @@ public class AdminController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Admin> updateAdmin(@RequestBody RequestAdminDTO requestAdminDTO){
+    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(this.adminService.updateAdmin(requestAdminDTO));
+                .body(this.adminService.updateAdmin(admin));
     }
 
     @DeleteMapping("/delete")

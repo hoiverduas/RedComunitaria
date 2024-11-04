@@ -32,11 +32,11 @@ public class Comment  {
     @Enumerated(EnumType.STRING)
     private ReactionType reactionType;
 
-    @JsonIgnore
+
     @ManyToOne
     private User users;
 
-    @JsonIgnore
+
     @ManyToOne
     private Publication publication;
 
