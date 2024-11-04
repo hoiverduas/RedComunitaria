@@ -61,14 +61,15 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public Optional<Admin> findById(Long id) {
-        return this.adminRepository
+    public Optional<ResponseAdminDTO> findById(Long id) {
+         Admin admin = adminRepository
                 .findById(id)
-                .or(() -> {throw  new RuntimeException("Not Found");
+                .orElseThrow(() -> {throw  new RuntimeException("Not Found");
                 });
+        return Optional.of(mapToDto(admin));
     }
 
-    @Override
+    /*@Override
     public Admin updateAdmin(Admin admin) {
 
         Optional<Admin> optionalAdmin = findById(admin.getId());
@@ -90,9 +91,9 @@ public class AdminService implements IAdminService {
 
             throw new RuntimeException("Not Found");
         }
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void deleteAdminById(Long id) {
 
         Optional<Admin>optionalAdmin = findById(id);
@@ -105,12 +106,15 @@ public class AdminService implements IAdminService {
             throw new RuntimeException("No found");
         }
 
-    }
+    }*/
 
 
-    private ResponseAdminDTO mapToDto(Admin admin){
-        return this.modelMapper
-                .map(admin,ResponseAdminDTO.class);
+    private ResponseAdminDTO mapToDto(Admin admin) {
+        ResponseAdminDTO responseAdminDTO = this.modelMapper.map(admin, ResponseAdminDTO.class);
+        if (admin.getCities() != null) {
+            responseAdminDTO.setCityId(admin.getCities().getId()); // Asigna el ID de la ciudad manualmente
+        }
+        return responseAdminDTO;
     }
 
     private Admin mapToEntity(RequestAdminDTO requestAdminDTO){

@@ -37,13 +37,13 @@ public class AdminController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Admin>> getAdminById(@PathVariable Long id){
+    public ResponseEntity<Optional<ResponseAdminDTO>> getAdminById(@PathVariable Long id){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.adminService.findById(id));
     }
 
-    @PutMapping("/update")
+   /* @PutMapping("/update")
     public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin){
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -55,6 +55,6 @@ public class AdminController {
          this.adminService.deleteAdminById(id);
          return ResponseEntity
                  .status(HttpStatus.OK).build();
-    }
+    }*/
 
 }

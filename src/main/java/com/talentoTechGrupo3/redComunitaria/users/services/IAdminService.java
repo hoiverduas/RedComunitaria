@@ -11,8 +11,8 @@ public interface IAdminService {
 
     ResponseAdminDTO createAdmin(RequestAdminDTO requestAdminDTO);
     List<ResponseAdminDTO> findAll();
-    Optional<Admin> findById(Long id);
-    Admin updateAdmin(Admin admin);
-    void deleteAdminById(Long id);
+    Optional<ResponseAdminDTO> findById(Long id);
+//    Admin updateAdmin(Admin admin);
+//    void deleteAdminById(Long id);
 
 }
