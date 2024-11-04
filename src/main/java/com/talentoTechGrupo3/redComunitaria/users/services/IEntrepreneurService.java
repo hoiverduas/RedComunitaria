@@ -8,10 +8,10 @@ import java.util.Optional;
 
 public interface IEntrepreneurService {
 
-    Entrepreneur createEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO);
-    List<Entrepreneur> findAllEntrepreneur();
-    Optional<Entrepreneur> findByIdEntrepreneur(Long id);
-    Entrepreneur updateEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO);
+    RequestEntrepreneurDTO createEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO);
+    List<RequestEntrepreneurDTO> findAllEntrepreneur();
+    Optional<RequestEntrepreneurDTO> findByIdEntrepreneur(Long id);
+    RequestEntrepreneurDTO updateEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO);
     void deleteEntrepreneurById(Long id);
 
 

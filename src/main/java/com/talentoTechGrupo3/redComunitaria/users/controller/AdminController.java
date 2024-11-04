@@ -1,5 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.users.controller;
 
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.RequestAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Admin;
 import com.talentoTechGrupo3.redComunitaria.users.services.impl.AdminService;
 import org.springframework.http.HttpStatus;
@@ -20,10 +21,10 @@ public class AdminController {
     }
 
     @PostMapping
-    public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin){
+    public ResponseEntity<Admin> createAdmin(@RequestBody RequestAdminDTO requestAdminDTO){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(this.adminService.createAdmin(admin));
+                .body(this.adminService.createAdmin(requestAdminDTO));
     }
     @GetMapping
     public ResponseEntity<List<Admin>> getAdminAll(){
@@ -41,10 +42,10 @@ public class AdminController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin){
+    public ResponseEntity<Admin> updateAdmin(@RequestBody RequestAdminDTO requestAdminDTO){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(this.adminService.updateAdmin(admin));
+                .body(this.adminService.updateAdmin(requestAdminDTO));
     }
 
     @DeleteMapping("/delete")

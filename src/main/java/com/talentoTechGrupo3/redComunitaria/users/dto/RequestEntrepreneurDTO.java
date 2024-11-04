@@ -21,4 +21,5 @@ public class RequestEntrepreneurDTO {
     private String fullName;
     private Specialty specialty;
     private Long cityId;
+
 }

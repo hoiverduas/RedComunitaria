@@ -1,6 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.users.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -8,7 +9,9 @@ import com.talentoTechGrupo3.redComunitaria.comments.entities.Comment;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Publication;
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.Reaction;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.util.List;
@@ -30,6 +33,8 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "roles")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class User {
 
     @Id
@@ -46,17 +51,21 @@ public abstract class User {
     private Boolean disabled;
 
 
-    @OneToMany(mappedBy = "users",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "users",fetch = FetchType.LAZY)
+    @JsonManagedReference
     List<Comment> comments;
 
 
-    @OneToMany(mappedBy = "users" ,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "users" ,fetch = FetchType.LAZY)
+    @JsonManagedReference
     List<Publication> publications;
 
     @ManyToOne
+    @JsonManagedReference
     private City cities;
 
-    @OneToMany(mappedBy = "user" )
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Reaction> reactions;
 
     @Transient

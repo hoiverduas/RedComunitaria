@@ -1,6 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.users.services;
 
-import com.talentoTechGrupo3.redComunitaria.users.dto.RequestAdminDTO;
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.RequestAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Admin;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.users.services.impl;
 
+import com.talentoTechGrupo3.redComunitaria.publications.entities.Entrepreneurship;
 import com.talentoTechGrupo3.redComunitaria.users.dto.RequestEntrepreneurDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.City;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Entrepreneur;
@@ -9,6 +10,7 @@ import com.talentoTechGrupo3.redComunitaria.users.services.IEntrepreneurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +25,12 @@ public class EntrepreneurService implements IEntrepreneurService {
     @Autowired
     public EntrepreneurService(IEntrepreneurRepository entrepreneurRepository, ICityRepository cityRepository) {
         this.entrepreneurRepository = entrepreneurRepository;
-
         this.cityRepository = cityRepository;
     }
 
 
     @Override
-    public Entrepreneur createEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO) {
+    public RequestEntrepreneurDTO createEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO) {
 
         Long cityId = requestEntrepreneurDTO.getCityId();
         City city = cityRepository
@@ -48,42 +49,132 @@ public class EntrepreneurService implements IEntrepreneurService {
         entrepreneur.setFullName(requestEntrepreneurDTO.getFullName());
         entrepreneur.setSpecialty(requestEntrepreneurDTO.getSpecialty());
         entrepreneur.setCities(city);
-        return this.entrepreneurRepository.save(entrepreneur);
+
+        entrepreneurRepository.save(entrepreneur);
+
+        RequestEntrepreneurDTO responseDTO = new RequestEntrepreneurDTO();
+
+        responseDTO.setId(entrepreneur.getId());
+        responseDTO.setUsername(entrepreneur.getUsername());
+        responseDTO.setPassword(entrepreneur.getPassword());
+        responseDTO.setEmail(entrepreneur.getEmail());
+        responseDTO.setLocked(entrepreneur.getLocked());
+        responseDTO.setDisabled(entrepreneur.getDisabled());
+        responseDTO.setExperience(entrepreneur.getExperience());
+        responseDTO.setContact(entrepreneur.getContact());
+        responseDTO.setFullName(entrepreneur.getFullName());
+        responseDTO.setSpecialty(entrepreneur.getSpecialty());
+        responseDTO.setCityId(city.getId());
+
+        return responseDTO;
+
     }
 
     @Override
-    public List<Entrepreneur> findAllEntrepreneur() {
-        return (List<Entrepreneur>) this.entrepreneurRepository.findAll();
+    public List<RequestEntrepreneurDTO> findAllEntrepreneur() {
+        List<Entrepreneur>entrepreneurs = (List<Entrepreneur>) entrepreneurRepository.findAll();
+        List<RequestEntrepreneurDTO>requestEntrepreneurDTOS = new ArrayList<>();
+
+        for (Entrepreneur entrepreneur: entrepreneurs) {
+
+            Long cityId = (entrepreneur.getCities() != null) ? entrepreneur.getCities().getId() : null;
+
+            requestEntrepreneurDTOS.add(new RequestEntrepreneurDTO(entrepreneur.getId(),
+                    entrepreneur.getUsername(),
+                    entrepreneur.getPassword(),
+                    entrepreneur.getEmail(),
+                    entrepreneur.getLocked(),
+                    entrepreneur.getDisabled(),
+                    entrepreneur.getExperience(),
+                    entrepreneur.getContact(),
+                    entrepreneur.getFullName(),
+                    entrepreneur.getSpecialty(),
+                    cityId ));
+        }
+
+        return requestEntrepreneurDTOS;
     }
 
     @Override
-    public Optional<Entrepreneur> findByIdEntrepreneur(Long id) {
-        return this.entrepreneurRepository
-                .findById(id)
-                .or(()->{throw new RuntimeException("Not Found");
-                });
+    public Optional<RequestEntrepreneurDTO> findByIdEntrepreneur(Long id) {
+
+        Optional<Entrepreneur>optionalEntrepreneur =  entrepreneurRepository.findById(id);
+
+        Optional<RequestEntrepreneurDTO> requestEntrepreneurDTO = null;
+
+        if (optionalEntrepreneur.isPresent()){
+
+            Entrepreneur existEntrepreneur = optionalEntrepreneur.get();
+
+            Long cityId = (existEntrepreneur.getCities() != null) ? existEntrepreneur.getCities().getId() : null;
+
+            RequestEntrepreneurDTO requestDTO = new RequestEntrepreneurDTO();
+
+            requestDTO.setCityId(cityId);
+            requestDTO.setEmail(existEntrepreneur.getEmail());
+            requestDTO.setLocked(existEntrepreneur.getLocked());
+            requestDTO.setDisabled(existEntrepreneur.getDisabled());
+            requestDTO.setId(existEntrepreneur.getId());
+            requestDTO.setFullName(existEntrepreneur.getFullName());
+            requestDTO.setSpecialty(existEntrepreneur.getSpecialty());
+            requestDTO.setContact(existEntrepreneur.getContact());
+            requestDTO.setUsername(existEntrepreneur.getUsername());
+            requestDTO.setPassword(existEntrepreneur.getPassword());
+            requestDTO.setExperience(existEntrepreneur.getExperience());
+
+            requestEntrepreneurDTO = Optional.of(requestDTO);
+
+            return requestEntrepreneurDTO;
+
+        }else {
+            throw new RuntimeException("Not Found");
+        }
+
     }
 
     @Override
-    public Entrepreneur updateEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO) {
+    public RequestEntrepreneurDTO updateEntrepreneur(RequestEntrepreneurDTO requestEntrepreneurDTO) {
 
-             Optional<Entrepreneur>optionalEntrepreneur =findByIdEntrepreneur(requestEntrepreneurDTO.getId());
+        Long cityId = requestEntrepreneurDTO.getCityId();
+        City city = cityRepository
+                .findById(cityId)
+                .orElseThrow(()->new RuntimeException("Not Found"));
 
-             if (optionalEntrepreneur.isPresent()){
+             if (entrepreneurRepository.findById(requestEntrepreneurDTO.getId()).isPresent()){
 
-                 Entrepreneur existEntrepreneur = optionalEntrepreneur.get();
+                 Optional<Entrepreneur> entrepreneur = entrepreneurRepository.findById(requestEntrepreneurDTO.getId());
 
-                 existEntrepreneur.setPassword(requestEntrepreneurDTO.getPassword());
-                 existEntrepreneur.setUsername(requestEntrepreneurDTO.getUsername());
-                 existEntrepreneur.setFullName(requestEntrepreneurDTO.getFullName());
-                 existEntrepreneur.setExperience(requestEntrepreneurDTO.getExperience());
-                 existEntrepreneur.setSpecialty(requestEntrepreneurDTO.getSpecialty());
-                 existEntrepreneur.setDisabled(requestEntrepreneurDTO.getDisabled());
-                 existEntrepreneur.setEmail(requestEntrepreneurDTO.getEmail());
-                 existEntrepreneur.setLocked(requestEntrepreneurDTO.getLocked());
-                 existEntrepreneur.setContact(requestEntrepreneurDTO.getContact());
+                 entrepreneur.get().setId(requestEntrepreneurDTO.getId());
+                 entrepreneur.get().setUsername(requestEntrepreneurDTO.getUsername());
+                 entrepreneur.get().setPassword(requestEntrepreneurDTO.getPassword());
+                 entrepreneur.get().setEmail(requestEntrepreneurDTO.getEmail());
+                 entrepreneur.get().setLocked(requestEntrepreneurDTO.getLocked());
+                 entrepreneur.get().setDisabled(requestEntrepreneurDTO.getDisabled());
+                 entrepreneur.get().setExperience(requestEntrepreneurDTO.getExperience());
+                 entrepreneur.get().setContact(requestEntrepreneurDTO.getContact());
+                 entrepreneur.get().setFullName(requestEntrepreneurDTO.getFullName());
+                 entrepreneur.get().setSpecialty(requestEntrepreneurDTO.getSpecialty());
+                 entrepreneur.get().setCities(city);
 
-                 return this.entrepreneurRepository.save(existEntrepreneur);
+                 entrepreneurRepository.save(entrepreneur.get());
+
+                 RequestEntrepreneurDTO responseDTO = new RequestEntrepreneurDTO();
+
+                 responseDTO.setId(entrepreneur.get().getId());
+                 responseDTO.setUsername(entrepreneur.get().getUsername());
+                 responseDTO.setPassword(entrepreneur.get().getPassword());
+                 responseDTO.setEmail(entrepreneur.get().getEmail());
+                 responseDTO.setLocked(entrepreneur.get().getLocked());
+                 responseDTO.setDisabled(entrepreneur.get().getDisabled());
+                 responseDTO.setExperience(entrepreneur.get().getExperience());
+                 responseDTO.setContact(entrepreneur.get().getContact());
+                 responseDTO.setFullName(entrepreneur.get().getFullName());
+                 responseDTO.setSpecialty(entrepreneur.get().getSpecialty());
+                 responseDTO.setCityId(city.getId());
+
+                 return responseDTO;
+
+
              }else {
                  throw new RuntimeException("Not Found");
              }
@@ -93,7 +184,7 @@ public class EntrepreneurService implements IEntrepreneurService {
     @Override
     public void deleteEntrepreneurById(Long id) {
 
-        Optional<Entrepreneur> optionalEntrepreneur = findByIdEntrepreneur(id);
+        Optional<RequestEntrepreneurDTO> optionalEntrepreneur = findByIdEntrepreneur(id);
         if (optionalEntrepreneur.isPresent()){
             this.entrepreneurRepository.deleteById(id);
         }else {

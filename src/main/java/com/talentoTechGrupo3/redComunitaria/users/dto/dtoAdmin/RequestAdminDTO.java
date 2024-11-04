@@ -1,4 +1,4 @@
-package com.talentoTechGrupo3.redComunitaria.users.dto;
+package com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin;
 
 import com.talentoTechGrupo3.redComunitaria.users.entities.AreaOfResponsibility;
 import lombok.AllArgsConstructor;

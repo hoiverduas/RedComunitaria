@@ -1,6 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.users.controller;
 
 
+import com.talentoTechGrupo3.redComunitaria.users.dto.RequestEntrepreneurDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Entrepreneur;
 import com.talentoTechGrupo3.redComunitaria.users.services.impl.EntrepreneurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,31 +24,31 @@ public class EntrepreneurController {
     }
 
     @PostMapping
-    public ResponseEntity<Entrepreneur> createEntrepreneur(@RequestBody Entrepreneur entrepreneur){
+    public ResponseEntity<RequestEntrepreneurDTO> createEntrepreneur(@RequestBody RequestEntrepreneurDTO requestEntrepreneurDTO){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(this.entrepreneurService.createEntrepreneur(entrepreneur));
+                .body(this.entrepreneurService.createEntrepreneur(requestEntrepreneurDTO));
     }
     @GetMapping
-    public ResponseEntity<List<Entrepreneur>> getEntrepreneurAll(){
+    public ResponseEntity<List<RequestEntrepreneurDTO>> getEntrepreneurAll(){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.entrepreneurService.findAllEntrepreneur());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Entrepreneur>> getEntrepreneur(@PathVariable Long id){
+    public ResponseEntity<Optional<RequestEntrepreneurDTO>> getEntrepreneur(@PathVariable Long id){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.entrepreneurService.findByIdEntrepreneur(id));
     }
     @PostMapping("/update")
-    public ResponseEntity<Entrepreneur> updateEntrepreneur(@RequestBody Entrepreneur entrepreneur){
+    public ResponseEntity<RequestEntrepreneurDTO> updateEntrepreneur(@RequestBody RequestEntrepreneurDTO requestEntrepreneurDTO){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(this.entrepreneurService.updateEntrepreneur(entrepreneur));
+                .body(this.entrepreneurService.updateEntrepreneur(requestEntrepreneurDTO));
     }
     @DeleteMapping("/delete")
-    public ResponseEntity<Entrepreneur> deleteEntrepreneur(@PathVariable Long id){
+    public ResponseEntity<Void> deleteEntrepreneur(@PathVariable Long id){
         this.entrepreneurService.deleteEntrepreneurById(id);
         return ResponseEntity
                 .status(HttpStatus.OK).build();
