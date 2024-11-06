@@ -10,7 +10,9 @@ import com.talentoTechGrupo3.redComunitaria.reactions.services.ICommentReactionS
 import com.talentoTechGrupo3.redComunitaria.users.entities.User;
 import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentReactionService implements ICommentReactionService {
 
     private final ICommentReactionRepository commentReactionRepository;

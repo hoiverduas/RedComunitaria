@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 
 
 
-@Entity
+
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "reaction_category")
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "reactions")
 public abstract class Reaction {
 
     @Id

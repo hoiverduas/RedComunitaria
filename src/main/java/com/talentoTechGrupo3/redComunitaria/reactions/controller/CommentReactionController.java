@@ -6,6 +6,7 @@ import com.talentoTechGrupo3.redComunitaria.reactions.dto.dtoCommetReaction.Resp
 import com.talentoTechGrupo3.redComunitaria.reactions.services.impl.CommentReactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,7 @@ public class CommentReactionController {
         this.commentReactionService = commentReactionService;
     }
 
+    @PostMapping
     public ResponseEntity<ResponseCommentReactionDTO> createCommentReaction(RequestCommentReactionDTO requestCommentReactionDTO){
        try {
            return ResponseEntity
