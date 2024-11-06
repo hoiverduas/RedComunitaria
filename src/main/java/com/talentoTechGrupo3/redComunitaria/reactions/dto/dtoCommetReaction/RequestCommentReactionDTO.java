@@ -1,4 +1,4 @@
-package com.talentoTechGrupo3.redComunitaria.comments.dto;
+package com.talentoTechGrupo3.redComunitaria.reactions.dto.dtoCommetReaction;
 
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.ReactionType;
 import lombok.AllArgsConstructor;
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDTO {
-    private String content;
-    private ReactionType reactionType;
+public class RequestCommentReactionDTO {
+
     private Long userId;
-    private Long publicationId;
+    private Long commentId;
+    private ReactionType reactionType;
 }

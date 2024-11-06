@@ -1,8 +1,9 @@
 package com.talentoTechGrupo3.redComunitaria.publications.services;
 
-import com.talentoTechGrupo3.redComunitaria.publications.dto.CreateEventDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.RequestEventDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.ResponseEventDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Event;
 
 public interface IEventService {
-    Event createEvent(CreateEventDTO createEventDTO);
+    ResponseEventDTO createEvent(RequestEventDTO requestEventDTO);
 }

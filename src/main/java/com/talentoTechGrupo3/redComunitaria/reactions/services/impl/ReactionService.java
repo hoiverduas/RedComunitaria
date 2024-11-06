@@ -3,18 +3,18 @@ package com.talentoTechGrupo3.redComunitaria.reactions.services.impl;
 
 import com.talentoTechGrupo3.redComunitaria.comments.entities.Comment;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Publication;
-import com.talentoTechGrupo3.redComunitaria.comments.entities.CommentReaction;
-import com.talentoTechGrupo3.redComunitaria.publications.entities.PublicationReaction;
+import com.talentoTechGrupo3.redComunitaria.reactions.entities.CommentReaction;
+import com.talentoTechGrupo3.redComunitaria.reactions.entities.PublicationReaction;
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.Reaction;
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.ReactionType;
-import com.talentoTechGrupo3.redComunitaria.users.entities.User;
-import com.talentoTechGrupo3.redComunitaria.comments.repository.ICommentReactionRepository;
-import com.talentoTechGrupo3.redComunitaria.comments.repository.ICommentRepository;
-import com.talentoTechGrupo3.redComunitaria.publications.repositories.IPublicationReactionRepository;
-import com.talentoTechGrupo3.redComunitaria.publications.repositories.IPublicationRepository;
-import com.talentoTechGrupo3.redComunitaria.reactions.repositories.IReactionRepository;
-import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.reactions.services.IReactionService;
+import com.talentoTechGrupo3.redComunitaria.users.entities.User;
+import com.talentoTechGrupo3.redComunitaria.reactions.repositories.ICommentReactionRepository;
+import com.talentoTechGrupo3.redComunitaria.comments.repository.ICommentRepository;
+import com.talentoTechGrupo3.redComunitaria.reactions.repositories.IPublicationReactionRepository;
+import com.talentoTechGrupo3.redComunitaria.publications.repositories.IPublicationRepository;
+import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +24,6 @@ import java.util.stream.Stream;
 @Service
 public class ReactionService implements IReactionService {
 
-    private final IReactionRepository reactionRepository;
 
     private final IUserRepository userRepository;
 
@@ -36,19 +35,22 @@ public class ReactionService implements IReactionService {
 
     private final ICommentReactionRepository commentReactionRepository;
 
-    public ReactionService(IReactionRepository reactionRepository,
-                           IUserRepository userRepository,
-                           IPublicationRepository publicationRepository,
-                           ICommentRepository commentRepository,
-                           IPublicationReactionRepository publicationReactionRepository,
-                           ICommentReactionRepository commentReactionRepository) {
+    private final ModelMapper modelMapper;
 
-        this.reactionRepository = reactionRepository;
+    public ReactionService(
+            IUserRepository userRepository,
+            IPublicationRepository publicationRepository,
+            ICommentRepository commentRepository,
+            IPublicationReactionRepository publicationReactionRepository,
+            ICommentReactionRepository commentReactionRepository,
+            ModelMapper modelMapper) {
+
         this.userRepository = userRepository;
         this.publicationRepository = publicationRepository;
         this.commentRepository = commentRepository;
         this.publicationReactionRepository = publicationReactionRepository;
         this.commentReactionRepository = commentReactionRepository;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -117,5 +119,7 @@ public class ReactionService implements IReactionService {
 
 
     }
+
+
 
 }

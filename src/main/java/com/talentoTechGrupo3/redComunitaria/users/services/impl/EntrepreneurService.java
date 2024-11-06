@@ -64,7 +64,7 @@ public class EntrepreneurService implements IEntrepreneurService {
         responseDTO.setContact(entrepreneur.getContact());
         responseDTO.setFullName(entrepreneur.getFullName());
         responseDTO.setSpecialty(entrepreneur.getSpecialty());
-        responseDTO.setCityId(city.getId());
+        responseDTO.setCityId(city.getIdCity());
 
         return responseDTO;
 
@@ -77,7 +77,7 @@ public class EntrepreneurService implements IEntrepreneurService {
 
         for (Entrepreneur entrepreneur: entrepreneurs) {
 
-            Long cityId = (entrepreneur.getCities() != null) ? entrepreneur.getCities().getId() : null;
+            Long cityId = (entrepreneur.getCities() != null) ? entrepreneur.getCities().getIdCity() : null;
 
             requestEntrepreneurDTOS.add(new RequestEntrepreneurDTO(entrepreneur.getId(),
                     entrepreneur.getUsername(),
@@ -106,7 +106,7 @@ public class EntrepreneurService implements IEntrepreneurService {
 
             Entrepreneur existEntrepreneur = optionalEntrepreneur.get();
 
-            Long cityId = (existEntrepreneur.getCities() != null) ? existEntrepreneur.getCities().getId() : null;
+            Long cityId = (existEntrepreneur.getCities() != null) ? existEntrepreneur.getCities().getIdCity() : null;
 
             RequestEntrepreneurDTO requestDTO = new RequestEntrepreneurDTO();
 
@@ -170,7 +170,7 @@ public class EntrepreneurService implements IEntrepreneurService {
                  responseDTO.setContact(entrepreneur.get().getContact());
                  responseDTO.setFullName(entrepreneur.get().getFullName());
                  responseDTO.setSpecialty(entrepreneur.get().getSpecialty());
-                 responseDTO.setCityId(city.getId());
+                 responseDTO.setCityId(city.getIdCity());
 
                  return responseDTO;
 

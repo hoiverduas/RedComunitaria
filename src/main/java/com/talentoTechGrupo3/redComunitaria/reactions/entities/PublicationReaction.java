@@ -1,6 +1,7 @@
-package com.talentoTechGrupo3.redComunitaria.publications.entities;
+package com.talentoTechGrupo3.redComunitaria.reactions.entities;
 
 
+import com.talentoTechGrupo3.redComunitaria.publications.entities.Publication;
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.Reaction;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

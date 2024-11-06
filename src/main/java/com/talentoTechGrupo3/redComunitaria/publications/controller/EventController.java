@@ -1,7 +1,8 @@
 package com.talentoTechGrupo3.redComunitaria.publications.controller;
 
 
-import com.talentoTechGrupo3.redComunitaria.publications.dto.CreateEventDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.RequestEventDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.ResponseEventDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Event;
 import com.talentoTechGrupo3.redComunitaria.publications.services.impl.EventService;
 import org.springframework.http.HttpStatus;
@@ -22,11 +23,11 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody CreateEventDTO createEventDTO){
+    public ResponseEntity<ResponseEventDTO> createEvent(@RequestBody RequestEventDTO requestEventDTO){
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(this.eventService.createEvent(createEventDTO));
+                    .body(this.eventService.createEvent(requestEventDTO));
         }catch (RuntimeException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND).build();

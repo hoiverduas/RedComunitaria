@@ -1,6 +1,6 @@
 package com.talentoTechGrupo3.redComunitaria.comments.controller;
 
-import com.talentoTechGrupo3.redComunitaria.comments.dto.CommentDTO;
+import com.talentoTechGrupo3.redComunitaria.comments.dto.RequestCommentDTO;
 import com.talentoTechGrupo3.redComunitaria.comments.entities.Comment;
 import com.talentoTechGrupo3.redComunitaria.comments.services.imp.CommentService;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Comment> createComment(@RequestBody CommentDTO commentDTO){
+    public ResponseEntity<Comment> createComment(@RequestBody RequestCommentDTO commentDTO){
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)

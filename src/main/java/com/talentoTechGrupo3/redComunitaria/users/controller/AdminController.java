@@ -1,6 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.users.controller;
 
 import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.RequestAdminDTO;
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.RequestUpdateAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.ResponseAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Admin;
 import com.talentoTechGrupo3.redComunitaria.users.services.impl.AdminService;
@@ -43,18 +44,18 @@ public class AdminController {
                 .body(this.adminService.findById(id));
     }
 
-   /* @PutMapping("/update")
-    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin){
+    @PutMapping("/update")
+    public ResponseEntity<ResponseAdminDTO> updateAdmin(@RequestBody RequestUpdateAdminDTO requestUpdateAdminDTO){
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(this.adminService.updateAdmin(admin));
+                .body(this.adminService.updateAdmin(requestUpdateAdminDTO));
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Admin> deleteAdminById(@PathVariable Long id){
+    public ResponseEntity<Void> deleteAdminById(@PathVariable Long id){
          this.adminService.deleteAdminById(id);
          return ResponseEntity
                  .status(HttpStatus.OK).build();
-    }*/
+    }
 
 }

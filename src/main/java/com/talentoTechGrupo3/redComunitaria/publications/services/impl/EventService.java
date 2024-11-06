@@ -1,11 +1,13 @@
 package com.talentoTechGrupo3.redComunitaria.publications.services.impl;
 
-import com.talentoTechGrupo3.redComunitaria.publications.dto.CreateEventDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.RequestEventDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.ResponseEventDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Event;
 import com.talentoTechGrupo3.redComunitaria.users.entities.User;
 import com.talentoTechGrupo3.redComunitaria.publications.repositories.IEventRepository;
 import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
 import com.talentoTechGrupo3.redComunitaria.publications.services.IEventService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -18,28 +20,45 @@ public class EventService implements IEventService {
 
     private final IUserRepository userRepository;
 
-    public EventService(IEventRepository eventRepository, IUserRepository userRepository) {
+    private final ModelMapper modelMapper;
+
+    public EventService(IEventRepository eventRepository, IUserRepository userRepository, ModelMapper modelMapper) {
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
-    public Event createEvent(CreateEventDTO createEventDTO) {
+    public ResponseEventDTO createEvent(RequestEventDTO requestEventDTO) {
 
-        Long userId = createEventDTO.getUserId();
+        Long userId = requestEventDTO.getUserId();
         User user =userRepository
                 .findById(userId)
                 .orElseThrow(()-> new RuntimeException("Not Found"));
 
-        Event event = new Event();
-        event.setUsers(user);
-        event.setEventType(createEventDTO.getEventType());
-        event.setName(createEventDTO.getName());
-        event.setDescription(createEventDTO.getDescription());
-        event.setDuration(createEventDTO.getDuration());
-        event.setContent(createEventDTO.getContent());
+        Event event = mapToEntity(requestEventDTO);
+        event.setId(null);
         event.setEventDate(LocalDateTime.now());
+        event.setUsers(user);
 
-        return this.eventRepository.save(event);
+        eventRepository.save(event);
+
+        ResponseEventDTO responseDTO = mapTaDto(event);
+        responseDTO.setUserId(userId);
+        responseDTO.setEventDate(event.getEventDate());
+
+        return responseDTO;
+
+
+    }
+
+    private ResponseEventDTO mapTaDto(Event event){
+        return this.modelMapper
+                .map(event,ResponseEventDTO.class);
+    }
+
+    private Event mapToEntity(RequestEventDTO requestEventDTO){
+        return this.modelMapper
+                .map(requestEventDTO,Event.class);
     }
 }

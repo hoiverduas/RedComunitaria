@@ -2,6 +2,7 @@ package com.talentoTechGrupo3.redComunitaria.users.services.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.RequestAdminDTO;
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.RequestUpdateAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.ResponseAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Admin;
 import com.talentoTechGrupo3.redComunitaria.users.entities.City;
@@ -35,22 +36,26 @@ public class AdminService implements IAdminService {
 
     @Override
     public ResponseAdminDTO createAdmin(RequestAdminDTO requestAdminDTO) {
+
         Long cityId = requestAdminDTO.getCityId();
         City city = cityRepository
                 .findById(cityId)
-                .orElseThrow(()->new RuntimeException("Not Found"));
+                .orElseThrow(() -> new RuntimeException("City not found"));
 
         Admin admin = mapToEntity(requestAdminDTO);
+        admin.setId(null);
         admin.setCities(city);
 
-        adminRepository.save(admin);
+        admin = adminRepository.save(admin);
+
 
         ResponseAdminDTO responseAdminDTO = mapToDto(admin);
         responseAdminDTO.setCityId(cityId);
 
         return responseAdminDTO;
-
     }
+
+
 
     @Override
     public List<ResponseAdminDTO> findAll() {
@@ -69,52 +74,23 @@ public class AdminService implements IAdminService {
         return Optional.of(mapToDto(admin));
     }
 
-    /*@Override
-    public Admin updateAdmin(Admin admin) {
+    @Override
+    public ResponseAdminDTO updateAdmin(RequestUpdateAdminDTO requestUpdateAdminDTO) {
+               findById(requestUpdateAdminDTO.getId());
+                Admin admin = adminRepository.save(mapToEntity(requestUpdateAdminDTO));
+               return mapToDto(admin);
 
-        Optional<Admin> optionalAdmin = findById(admin.getId());
+    }
 
-        if (optionalAdmin.isPresent()){
-
-            Admin existAdmin = optionalAdmin.get();
-
-            existAdmin.setUsername(admin.getUsername());
-            existAdmin.setPassword(admin.getPassword());
-            existAdmin.setEmail(admin.getUsername());
-            existAdmin.setDisabled(admin.getDisabled());
-            existAdmin.setLocked(admin.getLocked());
-            existAdmin.setAccessLevel(admin.getAccessLevel());
-            existAdmin.setAreaOfResponsibility(admin.getAreaOfResponsibility());
-
-            return this.adminRepository.save(existAdmin);
-        }else {
-
-            throw new RuntimeException("Not Found");
-        }
-    }*/
-
-   /* @Override
+    @Override
     public void deleteAdminById(Long id) {
-
-        Optional<Admin>optionalAdmin = findById(id);
-
-        if (optionalAdmin.isPresent()){
-
-            this.adminRepository.deleteById(id);
-
-        }else {
-            throw new RuntimeException("No found");
-        }
-
-    }*/
+        findById(id);
+        adminRepository.deleteById(id);
+    }
 
 
     private ResponseAdminDTO mapToDto(Admin admin) {
-        ResponseAdminDTO responseAdminDTO = this.modelMapper.map(admin, ResponseAdminDTO.class);
-        if (admin.getCities() != null) {
-            responseAdminDTO.setCityId(admin.getCities().getId()); // Asigna el ID de la ciudad manualmente
-        }
-        return responseAdminDTO;
+        return this.modelMapper.map(admin, ResponseAdminDTO.class);
     }
 
     private Admin mapToEntity(RequestAdminDTO requestAdminDTO){
@@ -122,5 +98,9 @@ public class AdminService implements IAdminService {
                 .map(requestAdminDTO,Admin.class);
     }
 
+    private Admin mapToEntity(RequestUpdateAdminDTO requestUpdateAdminDTO){
+        return this.modelMapper
+                .map(requestUpdateAdminDTO,Admin.class);
+    }
 
 }

@@ -1,7 +1,8 @@
 package com.talentoTechGrupo3.redComunitaria.publications.controller;
 
 
-import com.talentoTechGrupo3.redComunitaria.publications.dto.CreateEntrepreneurshipDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEntrepreneurship.RequestEntrepreneurshipDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEntrepreneurship.ResponseEntrepreneurshipDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Entrepreneurship;
 import com.talentoTechGrupo3.redComunitaria.publications.services.impl.EntrepreneurshipService;
 import org.springframework.http.HttpStatus;
@@ -19,11 +20,11 @@ public class EntrepreneurshipController {
     }
 
     @PostMapping
-    public ResponseEntity<Entrepreneurship> createEntrepreneurship(@RequestBody CreateEntrepreneurshipDTO createEntrepreneurshipDTO) {
+    public ResponseEntity<ResponseEntrepreneurshipDTO> createEntrepreneurship(@RequestBody RequestEntrepreneurshipDTO requestEntrepreneurshipDTO) {
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(this.entrepreneurshipService.createEntrepreneurship(createEntrepreneurshipDTO));
+                    .body(this.entrepreneurshipService.createEntrepreneurship(requestEntrepreneurshipDTO));
         } catch (RuntimeException e) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND).build();

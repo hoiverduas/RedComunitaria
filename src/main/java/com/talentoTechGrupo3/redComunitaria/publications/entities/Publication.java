@@ -37,13 +37,8 @@ public abstract class Publication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-
-    @Enumerated(EnumType.STRING)
-    private ReactionType reactionType;
-
     @ManyToOne
     private User users;
-
     @OneToMany(mappedBy = "publication")
     List<Comment>comments;
 

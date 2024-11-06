@@ -17,7 +17,7 @@ public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idCity;
     private String nameCity;
     @ManyToOne
     private Department department;
