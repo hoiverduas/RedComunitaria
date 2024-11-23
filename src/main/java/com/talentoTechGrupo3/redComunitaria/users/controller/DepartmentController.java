@@ -1,5 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.users.controller;
 
+import com.talentoTechGrupo3.redComunitaria.users.dto.RequestDepartmentDTO;
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoDepartment.ResponseDepartmentDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Department;
 import com.talentoTechGrupo3.redComunitaria.users.services.impl.DepartmentService;
 import org.springframework.http.HttpStatus;
@@ -19,11 +21,11 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public ResponseEntity<Department> createDepartment(@RequestBody Department department){
+    public ResponseEntity<ResponseDepartmentDTO> createDepartment(@RequestBody RequestDepartmentDTO requestDepartmentDTO){
        try {
            return ResponseEntity
                    .status(HttpStatus.CREATED)
-                   .body(this.departmentService.createDepartment(department));
+                   .body(this.departmentService.createDepartment(requestDepartmentDTO));
        }catch (RuntimeException e){
            return ResponseEntity.
                    status(HttpStatus.NOT_FOUND).build();
@@ -31,7 +33,7 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Department>> getAllDepartment(){
+    public ResponseEntity<List<ResponseDepartmentDTO>> getAllDepartment(){
        return ResponseEntity
                .status(HttpStatus.NOT_FOUND)
                .body(this.departmentService.findAllDepartment());

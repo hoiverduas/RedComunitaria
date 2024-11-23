@@ -4,4 +4,5 @@ import com.talentoTechGrupo3.redComunitaria.users.entities.City;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ICityRepository extends CrudRepository<City,Long> {
+
 }

@@ -1,8 +1,5 @@
-package com.talentoTechGrupo3.redComunitaria.users.dto;
+package com.talentoTechGrupo3.redComunitaria.users.dto.cityDto;
 
-import com.talentoTechGrupo3.redComunitaria.users.entities.Department;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestCityDTO {
+
     private String nameCity;
     private Long departmentId;
 }

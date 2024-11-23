@@ -1,8 +1,8 @@
 package com.talentoTechGrupo3.redComunitaria.users.controller;
 
 
-import com.talentoTechGrupo3.redComunitaria.users.dto.RequestCityDTO;
-import com.talentoTechGrupo3.redComunitaria.users.entities.City;
+import com.talentoTechGrupo3.redComunitaria.users.dto.cityDto.RequestCityDTO;
+import com.talentoTechGrupo3.redComunitaria.users.dto.cityDto.ResponseCityDTO;
 import com.talentoTechGrupo3.redComunitaria.users.services.impl.CityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<City> createCity(@RequestBody RequestCityDTO requestCityDTO){
+    public ResponseEntity<ResponseCityDTO> createCity(@RequestBody RequestCityDTO requestCityDTO){
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
@@ -34,7 +34,7 @@ public class CityController {
     }
 
     @GetMapping
-    public ResponseEntity<List<City>> getAllCity(){
+    public ResponseEntity<List<ResponseCityDTO>> getAllCity(){
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(this.cityService.findAllCity());
