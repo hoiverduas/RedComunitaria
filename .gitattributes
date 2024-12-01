@@ -1,0 +1,28 @@
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archivos de entorno de desarrollo
+*.log
+*.rar
+*.zip
+*.pdf
+*.docx
+*.png
+*.lnk
+target/
+node_modules/
+
+# Configuración personal
+*.iml
+.idea/
+.vscode/
+
+# Binarios de compilación
+*.class
+*.war
+*.jar
