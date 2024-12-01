@@ -31,10 +31,10 @@ public class UserSecurityService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User user = this.userRepository.findByUsername(username)
-                .orElseThrow(()-> new UsernameNotFoundException("User" + username + "Not found"));
+        User user = this.userRepository.findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("User" + email + "Not found"));
 
 
 
@@ -42,7 +42,7 @@ public class UserSecurityService implements UserDetailsService {
         String[] roles = { user.getRole() };
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUsername())
+                .username(user.getEmail())
                 .password(user.getPassword())
                 .authorities(this.grantedAuthorities(roles))
                 .build();

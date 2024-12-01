@@ -41,6 +41,7 @@ public abstract class User {
     private Long id;
     private String username;
     private String password;
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, columnDefinition = "TINYINT")

@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
-//@CrossOrigin("http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5174")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -29,14 +29,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginDto loginDto) {
-        UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+        UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
         Authentication authentication = this.authenticationManager.authenticate(login);
         System.out.println("authentication = " + authentication.isAuthenticated());
         System.out.println("authentication = " + authentication.getPrincipal());
 
         // Generación del token JWT
-        String jwt = this.jwtUtil.create(loginDto.getUsername());
+        String jwt = this.jwtUtil.create(loginDto.getEmail());
 
         // Devuelve el token JWT en el cuerpo de la respuesta
         Map<String, String> response = new HashMap<>();
