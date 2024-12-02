@@ -14,7 +14,7 @@ desktop.ini
 *.docx
 *.png
 *.lnk
-##target/
+target/
 node_modules/
 
 # Configuración personal
