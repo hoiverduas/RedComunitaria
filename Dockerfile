@@ -16,6 +16,6 @@ COPY ./src /root/src
 #CONTRUIR NUESTRA APLICACION
 RUN ./mvnw clean install -DskipTests
 #LEVANTA NUESTRA APLICACION CUANDO NUESTRO CONTENEDOR INICIE
-ENTRYPOINT ["java","-jar","/root/target/redComunitaria-0.0.4-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/root/target/redComunitaria-0.0.1-SNAPSHOT.jar"]
 
 
