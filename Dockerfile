@@ -1,21 +1,26 @@
-#IMAGEN MODELO
 FROM eclipse-temurin:17.0.13_11-jdk
-#INFORMAR EL PUETO DONDE SE EJECUTA EL CONTGENEDOR(INFORMATIVO)
+
 EXPOSE 8080
 
-#DEFINIR DIRECTORIO RAIZ DE NUESTRO CONTENEDOR
 WORKDIR /root
-#COPIAR Y PEGAR ARCHIVOS DENTRO DEL CONTENEDOR
+
 COPY ./pom.xml /root
 COPY ./.mvn /root/.mvn
 COPY ./mvnw /root
-#DESCARGAR LAS DEPENDENCIAS
+
+# Otorgar permisos de ejecución a mvnw
+RUN chmod +x /root/mvnw
+
+# Descargar las dependencias
 RUN ./mvnw dependency:go-offline
-#COPIAMOS EL CODIGO FUENTE DENRO EL CONTENEDOR
+
 COPY ./src /root/src
-#CONTRUIR NUESTRA APLICACION
+
+# Construir la aplicación
 RUN ./mvnw clean install -DskipTests
-#LEVANTA NUESTRA APLICACION CUANDO NUESTRO CONTENEDOR INICIE
-ENTRYPOINT ["java","-jar","/root/target/redComunitaria-0.0.1-SNAPSHOT.jar"]
+
+# Levantar la aplicación
+ENTRYPOINT ["java", "-jar", "/root/target/redComunitaria-0.0.1-SNAPSHOT.jar"]
+
 
 
