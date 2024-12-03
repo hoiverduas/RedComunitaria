@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IDepartmentService {
 
-    ResponseDepartmentDTO createDepartment(RequestDepartmentDTO requestDepartmentDTO);
+    List<ResponseDepartmentDTO> createDepartment(List<RequestDepartmentDTO> requestDepartmentDTOList);
     List<ResponseDepartmentDTO> findAllDepartment();
 
 }

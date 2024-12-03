@@ -23,11 +23,24 @@ public class DepartmentService implements IDepartmentService {
         this.modelMapper = modelMapper;
     }
 
+
     @Override
-    public ResponseDepartmentDTO createDepartment(RequestDepartmentDTO requestDepartmentDTO) {
-        Department department = mapToEntity(requestDepartmentDTO);
-        departmentRepository.save(department);
-        return mapToDto(department);
+    public List<ResponseDepartmentDTO> createDepartment(List<RequestDepartmentDTO> requestDepartmentDTOList) {
+
+        // Convertir la lista de DTOs a entidades
+        List<Department> departments = requestDepartmentDTOList.stream()
+                .map(this::mapToEntity)  // Mapea cada RequestDepartmentDTO a un Departamento
+                .collect(Collectors.toList());
+
+        // Guardar todos los departamentos en la base de datos
+        departmentRepository.saveAll(departments);
+
+        // Convertir las entidades guardadas de nuevo a DTOs y devolver la lista
+        return departments.stream()
+                .map(this::mapToDto)  // Mapea cada Departamento a un ResponseDepartmentDTO
+                .collect(Collectors.toList());
+
+
     }
 
     @Override

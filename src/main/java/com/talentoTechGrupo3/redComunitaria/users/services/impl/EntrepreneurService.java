@@ -39,6 +39,8 @@ public class EntrepreneurService implements IEntrepreneurService {
                 .findById(cityId)
                 .orElseThrow(()->new RuntimeException("Not Found"));
 
+        
+
         Entrepreneur entrepreneur = new Entrepreneur();
         entrepreneur.setId(requestEntrepreneurDTO.getId());
         entrepreneur.setUsername(requestEntrepreneurDTO.getUsername());

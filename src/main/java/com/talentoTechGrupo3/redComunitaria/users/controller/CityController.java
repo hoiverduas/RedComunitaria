@@ -21,11 +21,11 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseCityDTO> createCity(@RequestBody RequestCityDTO requestCityDTO){
+    public ResponseEntity<List<ResponseCityDTO>> createCity(@RequestBody List<RequestCityDTO> requestCityDTOs){
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
-                    .body(this.cityService.createCity(requestCityDTO));
+                    .body(this.cityService.createCity(requestCityDTOs));
         }catch (RuntimeException e){
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)

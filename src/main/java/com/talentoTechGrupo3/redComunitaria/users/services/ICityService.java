@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ICityService {
 
-    ResponseCityDTO createCity(RequestCityDTO requestCityDTO);
+    List<ResponseCityDTO> createCity(List<RequestCityDTO> requestCityDTOs);
     List<ResponseCityDTO> findAllCity();
 
 }

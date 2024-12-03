@@ -11,6 +11,7 @@ import com.talentoTechGrupo3.redComunitaria.users.services.ICityService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,23 +30,36 @@ public class CityService implements ICityService {
 
 
     @Override
-    public ResponseCityDTO createCity(RequestCityDTO requestCityDTO) {
+    public List<ResponseCityDTO> createCity(List<RequestCityDTO> requestCityDTOs) {
 
-        Long departmentId = requestCityDTO.getDepartmentId();
-        Department department = departmentRepository
-                .findById(departmentId)
-                .orElseThrow(()->new RuntimeException("Not Found"));
+        List<ResponseCityDTO> responseCityDTOs = new ArrayList<>();
 
-        City city = mapToEntity(requestCityDTO);
-        city.setIdCity(null);
-        city.setDepartment(department);
+        // Iteramos sobre la lista de RequestCityDTO
+        for (RequestCityDTO requestCityDTO : requestCityDTOs) {
 
-        cityRepository.save(city);
+            Long departmentId = requestCityDTO.getDepartmentId();
 
-        ResponseCityDTO responseCityDTO = mapToDto(city);
-        responseCityDTO.setDepartmentId(department.getId());
+            // Buscar el departamento
+            Department department = departmentRepository
+                    .findById(departmentId)
+                    .orElseThrow(() -> new RuntimeException("Departamento no encontrado"));
 
-        return responseCityDTO;
+            // Crear la ciudad
+            City city = mapToEntity(requestCityDTO);
+            city.setIdCity(null);  // Asegurarse de que el ID se auto-incremente
+            city.setDepartment(department);  // Asignar el departamento
+
+            // Guardar la ciudad
+            cityRepository.save(city);
+
+            // Crear el ResponseCityDTO y agregarlo a la lista
+            ResponseCityDTO responseCityDTO = mapToDto(city);
+            responseCityDTO.setDepartmentId(department.getId());
+
+            responseCityDTOs.add(responseCityDTO);
+        }
+
+        return responseCityDTOs;  // Retornar la lista de ciudades creadas
     }
 
     @Override

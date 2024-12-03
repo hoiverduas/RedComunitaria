@@ -21,11 +21,11 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDepartmentDTO> createDepartment(@RequestBody RequestDepartmentDTO requestDepartmentDTO){
+    public ResponseEntity<List<ResponseDepartmentDTO>> createDepartment(@RequestBody List<RequestDepartmentDTO> requestDepartmentDTOList){
        try {
            return ResponseEntity
                    .status(HttpStatus.CREATED)
-                   .body(this.departmentService.createDepartment(requestDepartmentDTO));
+                   .body(this.departmentService.createDepartment(requestDepartmentDTOList));
        }catch (RuntimeException e){
            return ResponseEntity.
                    status(HttpStatus.NOT_FOUND).build();
