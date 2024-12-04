@@ -1,16 +1,16 @@
 package com.talentoTechGrupo3.redComunitaria.publications.controller;
 
 
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEntrepreneurship.ResponseEntrepreneurshipDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.RequestEventDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.ResponseEventDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Event;
 import com.talentoTechGrupo3.redComunitaria.publications.services.impl.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/events")
@@ -33,6 +33,14 @@ public class EventController {
                     .status(HttpStatus.NOT_FOUND).build();
         }
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ResponseEventDTO>> getAllPublication(){
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.eventService.findAllEvent());
     }
 
 }

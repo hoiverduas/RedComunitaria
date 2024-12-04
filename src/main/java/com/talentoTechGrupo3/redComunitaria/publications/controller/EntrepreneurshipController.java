@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/entrepreneurShip")
 public class EntrepreneurshipController {
@@ -35,6 +37,15 @@ public class EntrepreneurshipController {
     public ResponseEntity<String> deletePublication(@PathVariable Long id){
                    this.entrepreneurshipService.deletePublication(id);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<ResponseEntrepreneurshipDTO>> getAllPublication(){
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(this.entrepreneurshipService.findAllEntrepreneurship());
     }
 
 }

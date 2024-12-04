@@ -1,7 +1,9 @@
 package com.talentoTechGrupo3.redComunitaria.publications.services.impl;
 
+import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEntrepreneurship.ResponseEntrepreneurshipDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.RequestEventDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEvent.ResponseEventDTO;
+import com.talentoTechGrupo3.redComunitaria.publications.entities.Entrepreneurship;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Event;
 import com.talentoTechGrupo3.redComunitaria.users.entities.User;
 import com.talentoTechGrupo3.redComunitaria.publications.repositories.IEventRepository;
@@ -11,6 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -43,7 +47,7 @@ public class EventService implements IEventService {
 
         eventRepository.save(event);
 
-        ResponseEventDTO responseDTO = mapTaDto(event);
+        ResponseEventDTO responseDTO = mapToDto(event);
         responseDTO.setUserId(userId);
         responseDTO.setEventDate(event.getEventDate());
 
@@ -52,9 +56,31 @@ public class EventService implements IEventService {
 
     }
 
-    private ResponseEventDTO mapTaDto(Event event){
-        return this.modelMapper
-                .map(event,ResponseEventDTO.class);
+    @Override
+    public List<ResponseEventDTO> findAllEvent() {
+
+        List<Event> events = (List<Event>) eventRepository.findAll();
+        return events.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+
+    }
+
+
+    private ResponseEventDTO mapToDto(Event event) {
+        ResponseEventDTO dto = new ResponseEventDTO();
+        dto.setId(event.getId());
+        dto.setContent(event.getContent());
+        dto.setEventDate(event.getEventDate());
+        dto.setName(event.getName());
+        dto.setDuration(event.getDuration());
+        dto.setUserId(event.getUsers().getId());
+        dto.setDescription(event.getDescription());
+        dto.setEventType(event.getEventType());
+
+
+
+        return dto;
     }
 
     private Event mapToEntity(RequestEventDTO requestEventDTO){

@@ -21,8 +21,6 @@ public class RequestEntrepreneurshipDTO {
     @Enumerated(EnumType.STRING)
     private TypeSector typeSector;
     private String content;
-    @Enumerated(EnumType.STRING)
-    private ReactionType reactionType;
     private Long userId;
 
 }

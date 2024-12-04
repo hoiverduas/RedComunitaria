@@ -22,8 +22,6 @@ public class ResponseEventDTO {
     private LocalDateTime eventDate;
     @Enumerated(EnumType.STRING)
     private EventType eventType;
-    @Enumerated(EnumType.STRING)
-    private ReactionType reactionType;
     private String duration;
     private String content;
     private Long userId;

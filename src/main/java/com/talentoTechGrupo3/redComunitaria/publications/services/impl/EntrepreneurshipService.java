@@ -2,6 +2,7 @@ package com.talentoTechGrupo3.redComunitaria.publications.services.impl;
 import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEntrepreneurship.RequestEntrepreneurshipDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.dto.dtoEntrepreneurship.ResponseEntrepreneurshipDTO;
 import com.talentoTechGrupo3.redComunitaria.publications.entities.Entrepreneurship;
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoAdmin.ResponseAdminDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.User;
 import com.talentoTechGrupo3.redComunitaria.publications.repositories.IEntrepreneurshipRepository;
 import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
@@ -9,6 +10,8 @@ import com.talentoTechGrupo3.redComunitaria.publications.services.IEntrepreneurs
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -64,9 +67,31 @@ public class EntrepreneurshipService implements IEntrepreneurshipService {
         return mapToDto(entrepreneurship);
     }
 
-    private ResponseEntrepreneurshipDTO mapToDto(Entrepreneurship entrepreneurship){
-        return this.modelMapper
-                .map(entrepreneurship,ResponseEntrepreneurshipDTO.class);
+    @Override
+    public List<ResponseEntrepreneurshipDTO> findAllEntrepreneurship() {
+
+       Entrepreneurship entrepreneurship = new Entrepreneurship();
+
+
+        List<Entrepreneurship> entrepreneurships = (List<Entrepreneurship>) entrepreneurshipRepository.findAll();
+        ResponseEntrepreneurshipDTO responseDto = new ResponseEntrepreneurshipDTO();
+        return entrepreneurships.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    private ResponseEntrepreneurshipDTO mapToDto(Entrepreneurship entrepreneurship) {
+        ResponseEntrepreneurshipDTO dto = new ResponseEntrepreneurshipDTO();
+        dto.setId(entrepreneurship.getId());
+        dto.setNameCompany(entrepreneurship.getNameCompany());
+        dto.setContent(entrepreneurship.getContent());
+        dto.setStartDate(entrepreneurship.getStartDate());
+        dto.setTypeSector(entrepreneurship.getTypeSector());
+        dto.setReceivedInvestment(entrepreneurship.getReceivedInvestment());
+        dto.setUserId(entrepreneurship.getUsers().getId());
+
+
+        return dto;
     }
 
     private Entrepreneurship mapToEntity(RequestEntrepreneurshipDTO requestEntrepreneurshipDTO){
