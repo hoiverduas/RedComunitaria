@@ -4,6 +4,7 @@ package com.talentoTechGrupo3.redComunitaria.users.controller;
 import com.talentoTechGrupo3.redComunitaria.config.JwtUtil;
 import com.talentoTechGrupo3.redComunitaria.users.dto.LoginDto;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Entrepreneur;
+import com.talentoTechGrupo3.redComunitaria.users.entities.Explorer;
 import com.talentoTechGrupo3.redComunitaria.users.entities.User;
 import com.talentoTechGrupo3.redComunitaria.users.repositories.IEntrepreneurRepository;
 import com.talentoTechGrupo3.redComunitaria.users.repositories.IUserRepository;
@@ -47,21 +48,20 @@ public class AuthController {
         );
 
         Authentication authentication = this.authenticationManager.authenticate(login);
-        System.out.println("authentication = " + authentication.isAuthenticated());
-        System.out.println("authentication = " + authentication.getPrincipal());
 
         // Generación del token JWT
         String jwt = this.jwtUtil.create(loginDto.getEmail());
 
         // Recuperar los datos del usuario autenticado
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Optional<User> userOptional = this.userRepository.findByEmail(loginDto.getEmail());
-        User user = userOptional.get();
 
         if (!userOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Usuario no encontrado"));
-        } else if (user instanceof Entrepreneur ) {
+        }
 
+        User user = userOptional.get();
+
+        if (user instanceof Entrepreneur) {
             Entrepreneur entrepreneur = (Entrepreneur) user;
             Map<String, Object> response = new HashMap<>();
             response.put("token", jwt);
@@ -70,21 +70,32 @@ public class AuthController {
                     "email", entrepreneur.getEmail(),
                     "username", entrepreneur.getUsername(),
                     "roles", entrepreneur.getRole(),
-                    "fullName",entrepreneur.getFullName(),
-                    "experience",entrepreneur.getExperience(),
-                    "contact",entrepreneur.getContact(),
-                    "specialty",entrepreneur.getSpecialty()
+                    "fullName", entrepreneur.getFullName(),
+                    "experience", entrepreneur.getExperience(),
+                    "contact", entrepreneur.getContact(),
+                    "specialty", entrepreneur.getSpecialty()
+            ));
+
+            return ResponseEntity.ok(response);
+        } else if (user instanceof Explorer) { // Cambiar aquí a la clase adecuada
+            Explorer explorer = (Explorer) user;
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", jwt);
+            response.put("user", Map.of(
+                    "id", explorer.getId(),
+                    "email", explorer.getEmail(),
+                    "username", explorer.getUsername(),
+                    "roles", explorer.getRole(),
+                    "fullName", explorer.getFullName(),
+                    "contact", explorer.getContact()
             ));
 
             return ResponseEntity.ok(response);
         }
 
-
-
-
-
-        return null;
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "Rol de usuario no reconocido"));
     }
+
 
 
 }
