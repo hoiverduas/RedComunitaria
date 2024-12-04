@@ -46,6 +46,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/entrepreneurShip/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/publication").permitAll()
                         .requestMatchers(HttpMethod.GET, "/events").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/explorers").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/explorers/**").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
