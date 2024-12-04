@@ -65,7 +65,7 @@ public class AuthController {
             Entrepreneur entrepreneur = (Entrepreneur) user;
             Map<String, Object> response = new HashMap<>();
             response.put("token", jwt);
-            response.put("user", Map.of(
+            response.put("Entrepreneur", Map.of(
                     "id", entrepreneur.getId(),
                     "email", entrepreneur.getEmail(),
                     "username", entrepreneur.getUsername(),
@@ -73,7 +73,8 @@ public class AuthController {
                     "fullName", entrepreneur.getFullName(),
                     "experience", entrepreneur.getExperience(),
                     "contact", entrepreneur.getContact(),
-                    "specialty", entrepreneur.getSpecialty()
+                    "specialty", entrepreneur.getSpecialty(),
+                    "city",entrepreneur.getCities().getIdCity()
             ));
 
             return ResponseEntity.ok(response);
@@ -81,13 +82,14 @@ public class AuthController {
             Explorer explorer = (Explorer) user;
             Map<String, Object> response = new HashMap<>();
             response.put("token", jwt);
-            response.put("user", Map.of(
+            response.put("Explorer", Map.of(
                     "id", explorer.getId(),
                     "email", explorer.getEmail(),
                     "username", explorer.getUsername(),
                     "roles", explorer.getRole(),
                     "fullName", explorer.getFullName(),
-                    "contact", explorer.getContact()
+                    "contact", explorer.getContact(),
+                    "city",explorer.getCities().getIdCity()
             ));
 
             return ResponseEntity.ok(response);
