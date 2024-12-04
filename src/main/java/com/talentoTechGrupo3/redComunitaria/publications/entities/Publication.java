@@ -29,7 +29,7 @@ public abstract class Publication {
     private String content;
     @ManyToOne
     private User users;
-    @OneToMany(mappedBy = "publication")
+    @OneToMany(mappedBy = "publication",cascade = CascadeType.ALL)
     List<Comment> comments;
 
     @Transient

@@ -49,6 +49,21 @@ public class EntrepreneurshipService implements IEntrepreneurshipService {
 
     }
 
+    @Override
+    public String deletePublication(Long id) {
+       findPublicationById(id);
+        entrepreneurshipRepository.deleteById(id);
+        return "La publicacion con id : "+ id + " fue eliminanda exitosamente";
+    }
+
+    @Override
+    public ResponseEntrepreneurshipDTO findPublicationById(Long id) {
+               Entrepreneurship entrepreneurship = entrepreneurshipRepository
+                       .findById(id)
+                       .orElseThrow(()->new RuntimeException("not Found"));
+        return mapToDto(entrepreneurship);
+    }
+
     private ResponseEntrepreneurshipDTO mapToDto(Entrepreneurship entrepreneurship){
         return this.modelMapper
                 .map(entrepreneurship,ResponseEntrepreneurshipDTO.class);

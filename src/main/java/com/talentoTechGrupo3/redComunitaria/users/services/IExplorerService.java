@@ -1,6 +1,7 @@
 package com.talentoTechGrupo3.redComunitaria.users.services;
 
 import com.talentoTechGrupo3.redComunitaria.users.dto.dtoExplorer.RequestExplorerDTO;
+import com.talentoTechGrupo3.redComunitaria.users.dto.dtoExplorer.RequestExplorerUpdateDTO;
 import com.talentoTechGrupo3.redComunitaria.users.dto.dtoExplorer.ResponseExplorerDTO;
 import com.talentoTechGrupo3.redComunitaria.users.entities.Explorer;
 
@@ -11,7 +12,7 @@ public interface IExplorerService {
     ResponseExplorerDTO createExplorer(RequestExplorerDTO requestExplorerDTO);
     List<ResponseExplorerDTO> findAllExplorer();
     ResponseExplorerDTO findExplorerById(Long id);
-    ResponseExplorerDTO updateExplorer(RequestExplorerDTO requestExplorerDTO);
+    ResponseExplorerDTO updateExplorer(RequestExplorerUpdateDTO requestExplorerUpdateDTO);
     String deleteExplorerById(Long id);
 
 }

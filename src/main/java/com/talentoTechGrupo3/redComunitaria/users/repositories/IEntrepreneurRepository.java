@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IEntrepreneurRepository extends CrudRepository<Entrepreneur,Long> {
 
-    Boolean existsByEmailAndPassword(String email,String password);
+    Boolean existsByEmailAndPasswordAndUsernameAndFullName(String email,String password,String username,String fullName);
 
 }

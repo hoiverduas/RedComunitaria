@@ -31,4 +31,10 @@ public class EntrepreneurshipController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePublication(@PathVariable Long id){
+                   this.entrepreneurshipService.deletePublication(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }

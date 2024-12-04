@@ -39,9 +39,18 @@ public class EntrepreneurService implements IEntrepreneurService {
                 .findById(cityId)
                 .orElseThrow(()->new RuntimeException("Not Found"));
 
-        
+
 
         Entrepreneur entrepreneur = new Entrepreneur();
+
+        if (entrepreneurRepository.existsByEmailAndPasswordAndUsernameAndFullName(
+                entrepreneur.getUsername(),
+                entrepreneur.getEmail(),
+                entrepreneur.getPassword(),
+                entrepreneur.getFullName())) {
+            throw new RuntimeException("Ya existe un usuario con estos datos.");
+        }
+
         entrepreneur.setId(requestEntrepreneurDTO.getId());
         entrepreneur.setUsername(requestEntrepreneurDTO.getUsername());
         entrepreneur.setPassword(passwordEncoder.encode(requestEntrepreneurDTO.getPassword()));
@@ -62,8 +71,8 @@ public class EntrepreneurService implements IEntrepreneurService {
         responseDTO.setUsername(entrepreneur.getUsername());
         responseDTO.setPassword(entrepreneur.getPassword());
         responseDTO.setEmail(entrepreneur.getEmail());
-        responseDTO.setLocked(entrepreneur.getLocked());
-        responseDTO.setDisabled(entrepreneur.getDisabled());
+        responseDTO.setLocked(false);
+        responseDTO.setDisabled(false);
         responseDTO.setExperience(entrepreneur.getExperience());
         responseDTO.setContact(entrepreneur.getContact());
         responseDTO.setFullName(entrepreneur.getFullName());

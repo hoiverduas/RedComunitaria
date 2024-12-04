@@ -1,10 +1,10 @@
 package com.talentoTechGrupo3.redComunitaria.users.dto.dtoExplorer;
 
-import com.talentoTechGrupo3.redComunitaria.users.entities.AreaOfResponsibility;
+
 import lombok.Data;
 
 @Data
-public class ResponseExplorerDTO {
+public class RequestExplorerUpdateDTO {
 
     private Long id;
     private String username;
@@ -16,4 +16,5 @@ public class ResponseExplorerDTO {
     private Boolean disabled;
     private String role;
     private Long cityId;
+
 }

@@ -7,5 +7,6 @@ import com.talentoTechGrupo3.redComunitaria.publications.entities.Entrepreneursh
 public interface IEntrepreneurshipService {
 
     ResponseEntrepreneurshipDTO createEntrepreneurship(RequestEntrepreneurshipDTO requestEntrepreneurshipDTO);
-
+    String deletePublication(Long id);
+    ResponseEntrepreneurshipDTO findPublicationById(Long id);
 }
