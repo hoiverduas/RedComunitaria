@@ -35,17 +35,28 @@ public class EntrepreneurshipController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePublication(@PathVariable Long id){
-                   this.entrepreneurshipService.deletePublication(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+
+        try {
+            this.entrepreneurshipService.deletePublication(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
 
     @GetMapping
     public ResponseEntity<List<ResponseEntrepreneurshipDTO>> getAllPublication(){
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.entrepreneurshipService.findAllEntrepreneurship());
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.entrepreneurshipService.findAllEntrepreneurship());
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.OK).build();
+        }
     }
 
 }

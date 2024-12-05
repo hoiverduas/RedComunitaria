@@ -25,9 +25,14 @@ public class EntrepreneurController {
 
     @PostMapping
     public ResponseEntity<RequestEntrepreneurDTO> createEntrepreneur(@RequestBody RequestEntrepreneurDTO requestEntrepreneurDTO){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.entrepreneurService.createEntrepreneur(requestEntrepreneurDTO));
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(this.entrepreneurService.createEntrepreneur(requestEntrepreneurDTO));
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST).build();
+        }
     }
     @GetMapping
     public ResponseEntity<List<RequestEntrepreneurDTO>> getEntrepreneurAll(){
@@ -38,22 +43,38 @@ public class EntrepreneurController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<RequestEntrepreneurDTO>> getEntrepreneur(@PathVariable Long id){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.entrepreneurService.findByIdEntrepreneur(id));
+       try {
+           return ResponseEntity
+                   .status(HttpStatus.OK)
+                   .body(this.entrepreneurService.findByIdEntrepreneur(id));
+       }catch (RuntimeException e){
+           return ResponseEntity
+                   .status(HttpStatus.NOT_FOUND).build();
+       }
     }
 
 
     @PutMapping("/update")
     public ResponseEntity<RequestEntrepreneurDTO> updateEntrepreneur(@RequestBody RequestEntrepreneurDTO requestEntrepreneurDTO){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.entrepreneurService.updateEntrepreneur(requestEntrepreneurDTO));
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.entrepreneurService.updateEntrepreneur(requestEntrepreneurDTO));
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND).build();
+        }
+
     }
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteEntrepreneur(@PathVariable Long id){
-        this.entrepreneurService.deleteEntrepreneurById(id);
-        return ResponseEntity
-                .status(HttpStatus.OK).build();
+       try {
+           this.entrepreneurService.deleteEntrepreneurById(id);
+           return ResponseEntity
+                   .status(HttpStatus.OK).build();
+       }catch (RuntimeException e){
+           return ResponseEntity
+                   .status(HttpStatus.NOT_FOUND).build();
+       }
     }
 }

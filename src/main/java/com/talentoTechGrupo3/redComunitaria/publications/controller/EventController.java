@@ -37,7 +37,6 @@ public class EventController {
 
     @GetMapping
     public ResponseEntity<List<ResponseEventDTO>> getAllPublication(){
-
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(this.eventService.findAllEvent());

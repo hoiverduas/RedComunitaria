@@ -25,36 +25,62 @@ public class ExplorerController {
 
     @PostMapping
     public ResponseEntity<ResponseExplorerDTO> createExplorer(@RequestBody RequestExplorerDTO requestExplorerDTO){
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(this.explorerService.createExplorer(requestExplorerDTO));
+       try {
+           return ResponseEntity
+                   .status(HttpStatus.CREATED)
+                   .body(this.explorerService.createExplorer(requestExplorerDTO));
+       }catch (RuntimeException e){
+           return ResponseEntity
+                   .status(HttpStatus.BAD_REQUEST).build();
+
+       }
     }
 
     @GetMapping
     public ResponseEntity<List<ResponseExplorerDTO>> getAllExplorers(){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.explorerService.findAllExplorer());
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.explorerService.findAllExplorer());
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ResponseExplorerDTO> getExplorerById(@PathVariable Long id){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.explorerService.findExplorerById(id));
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.explorerService.findExplorerById(id));
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @PutMapping
     public ResponseEntity<ResponseExplorerDTO> update(@RequestBody RequestExplorerUpdateDTO requestExplorerUpdateDTO){
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(this.explorerService.updateExplorer(requestExplorerUpdateDTO));
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(this.explorerService.updateExplorer(requestExplorerUpdateDTO));
+        }catch (RuntimeException e){
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteExplorerById(@PathVariable Long id){
-          this.explorerService.deleteExplorerById(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+         try {
+             this.explorerService.deleteExplorerById(id);
+             return ResponseEntity.status(HttpStatus.OK).build();
+         }catch (RuntimeException e){
+             return ResponseEntity
+                     .status(HttpStatus.NOT_FOUND).build();
+         }
     }
 
 }

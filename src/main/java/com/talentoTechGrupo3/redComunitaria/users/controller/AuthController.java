@@ -74,7 +74,7 @@ public class AuthController {
                     "experience", entrepreneur.getExperience(),
                     "contact", entrepreneur.getContact(),
                     "specialty", entrepreneur.getSpecialty(),
-                    "city",entrepreneur.getCities().getIdCity()
+                    "city",entrepreneur.getCities().getNameCity()
             ));
 
             return ResponseEntity.ok(response);
@@ -89,7 +89,7 @@ public class AuthController {
                     "roles", explorer.getRole(),
                     "fullName", explorer.getFullName(),
                     "contact", explorer.getContact(),
-                    "city",explorer.getCities().getIdCity()
+                    "city",explorer.getCities().getNameCity()
             ));
 
             return ResponseEntity.ok(response);

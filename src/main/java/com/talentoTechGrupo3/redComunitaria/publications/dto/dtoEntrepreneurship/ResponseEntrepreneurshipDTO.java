@@ -22,7 +22,6 @@ public class ResponseEntrepreneurshipDTO {
     private Double receivedInvestment;
     private TypeSector typeSector;
     private String content;
-    private ReactionType reactionType;
     private Long userId;
 
 }
