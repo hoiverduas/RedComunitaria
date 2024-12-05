@@ -48,6 +48,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/events").permitAll()
                         .requestMatchers(HttpMethod.POST, "/explorers").permitAll()
                         .requestMatchers(HttpMethod.GET, "/explorers/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/comment").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/comment/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/comment/**").permitAll()
 
                         .anyRequest().authenticated()
                 )

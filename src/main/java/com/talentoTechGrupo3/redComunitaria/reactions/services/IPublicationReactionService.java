@@ -9,4 +9,7 @@ import com.talentoTechGrupo3.redComunitaria.reactions.entities.ReactionType;
 public interface IPublicationReactionService {
 
     ResponsePublicationReactionDTO createReactionPublication(RequestPublicationReactionDTO requestPublicationReactionDTO);
+    String deleteReactionById(Long id);
+
+
 }

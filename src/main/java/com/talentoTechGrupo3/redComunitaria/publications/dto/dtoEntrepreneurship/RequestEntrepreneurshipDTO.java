@@ -17,7 +17,7 @@ public class RequestEntrepreneurshipDTO {
 
     private String nameCompany;
     private LocalDateTime startDate;
-    private Double receivedInvestment;
+    private String receivedInvestment;
     @Enumerated(EnumType.STRING)
     private TypeSector typeSector;
     private String content;

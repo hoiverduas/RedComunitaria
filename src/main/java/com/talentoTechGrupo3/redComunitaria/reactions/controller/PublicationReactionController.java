@@ -8,9 +8,7 @@ import com.talentoTechGrupo3.redComunitaria.reactions.services.impl.PublicationR
 import com.talentoTechGrupo3.redComunitaria.reactions.services.impl.ReactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/publicationReaction")
@@ -33,5 +31,12 @@ public class PublicationReactionController {
                     .status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteReaction(@PathVariable Long id) {
+        String response = publicationReactionService.deleteReactionById(id);
+        return ResponseEntity.ok(response);
+    }
+
 
 }

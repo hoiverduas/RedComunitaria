@@ -1,6 +1,8 @@
 package com.talentoTechGrupo3.redComunitaria.comments.controller;
 
 import com.talentoTechGrupo3.redComunitaria.comments.dto.RequestCommentDTO;
+import com.talentoTechGrupo3.redComunitaria.comments.dto.RequestUpdateCommentDTO;
+import com.talentoTechGrupo3.redComunitaria.comments.dto.ResponseCommentDTO;
 import com.talentoTechGrupo3.redComunitaria.comments.entities.Comment;
 import com.talentoTechGrupo3.redComunitaria.comments.services.imp.CommentService;
 import org.springframework.http.HttpStatus;
@@ -21,7 +23,7 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Comment> createComment(@RequestBody RequestCommentDTO commentDTO){
+    public ResponseEntity<ResponseCommentDTO> createComment(@RequestBody RequestCommentDTO commentDTO){
         try {
             return ResponseEntity
                     .status(HttpStatus.CREATED)
@@ -35,7 +37,7 @@ public class CommentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Comment>> getAllComment(){
+    public ResponseEntity<List<ResponseCommentDTO>> getAllComment(){
         try {
             return ResponseEntity
                     .status(HttpStatus.OK)
@@ -47,7 +49,7 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public  ResponseEntity<Comment> getCommentById(@PathVariable Long id){
+    public  ResponseEntity<ResponseCommentDTO> getCommentById(@PathVariable Long id){
         try {
             return ResponseEntity
                     .status(HttpStatus.OK)
@@ -69,5 +71,12 @@ public class CommentController {
                     .status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseCommentDTO> updateComment(@RequestBody RequestUpdateCommentDTO commentDTO) {
+        ResponseCommentDTO updatedComment = commentService.updateComment(commentDTO);
+        return ResponseEntity.ok(updatedComment);
+    }
+
 
 }

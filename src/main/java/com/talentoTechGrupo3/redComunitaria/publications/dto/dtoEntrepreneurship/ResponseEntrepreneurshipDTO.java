@@ -19,7 +19,7 @@ public class ResponseEntrepreneurshipDTO {
     private Long id;
     private String nameCompany;
     private LocalDateTime startDate;
-    private Double receivedInvestment;
+    private String receivedInvestment;
     private TypeSector typeSector;
     private String content;
     private Long userId;

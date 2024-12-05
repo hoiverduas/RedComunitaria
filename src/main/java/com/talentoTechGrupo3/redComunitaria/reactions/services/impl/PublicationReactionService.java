@@ -5,6 +5,7 @@ import com.talentoTechGrupo3.redComunitaria.publications.entities.Publication;
 import com.talentoTechGrupo3.redComunitaria.publications.repositories.IPublicationRepository;
 import com.talentoTechGrupo3.redComunitaria.reactions.dto.dtoPublicatioReaction.RequestPublicationReactionDTO;
 import com.talentoTechGrupo3.redComunitaria.reactions.dto.dtoPublicatioReaction.ResponsePublicationReactionDTO;
+import com.talentoTechGrupo3.redComunitaria.reactions.entities.CommentReaction;
 import com.talentoTechGrupo3.redComunitaria.reactions.entities.PublicationReaction;
 import com.talentoTechGrupo3.redComunitaria.reactions.repositories.IPublicationReactionRepository;
 import com.talentoTechGrupo3.redComunitaria.reactions.services.IPublicationReactionService;
@@ -58,6 +59,22 @@ public class PublicationReactionService implements IPublicationReactionService {
         return reactionDTO;
 
     }
+
+
+    @Override
+    public String deleteReactionById(Long id) {
+        // Verificar que la reacción exista
+        PublicationReaction publicationReaction = publicationReactionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reacción no encontrada"));
+        // Eliminar la reacción
+        this.publicationReactionRepository.deleteById(id);
+
+        return "Reacción con ID: " + id + " eliminada exitosamente";
+    }
+
+
+
+
 
     private ResponsePublicationReactionDTO mapToDto(PublicationReaction publicationReaction){
         return this.modelMapper

@@ -20,7 +20,7 @@ public class Entrepreneurship extends Publication {
     @Column(name = "name_company")
     private String nameCompany;
     private LocalDateTime startDate;
-    private Double receivedInvestment;
+    private String receivedInvestment;
     @Enumerated(EnumType.STRING)
     private TypeSector typeSector;
 
