@@ -27,6 +27,7 @@ public abstract class Publication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
+    private String image;
     @ManyToOne
     private User users;
     @OneToMany(mappedBy = "publication",cascade = CascadeType.ALL)

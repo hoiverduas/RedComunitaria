@@ -89,6 +89,7 @@ public class EntrepreneurshipService implements IEntrepreneurshipService {
         dto.setTypeSector(entrepreneurship.getTypeSector());
         dto.setReceivedInvestment(entrepreneurship.getReceivedInvestment());
         dto.setUserId(entrepreneurship.getUsers().getId());
+        dto.setImage(entrepreneurship.getImage());
 
 
         return dto;

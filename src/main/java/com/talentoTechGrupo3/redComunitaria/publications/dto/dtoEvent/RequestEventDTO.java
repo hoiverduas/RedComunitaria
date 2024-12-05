@@ -23,5 +23,6 @@ public class RequestEventDTO {
     private String duration;
     private String content;
     private Long userId;
+    private String image;
 
 }

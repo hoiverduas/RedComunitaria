@@ -41,7 +41,7 @@ public abstract class User {
     private Long id;
     private String username;
     private String password;
-    private String image;
+
     @Column(nullable = false, unique = true)
     private String email;
 

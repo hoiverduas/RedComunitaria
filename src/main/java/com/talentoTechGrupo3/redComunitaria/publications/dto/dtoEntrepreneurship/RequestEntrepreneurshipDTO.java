@@ -22,5 +22,6 @@ public class RequestEntrepreneurshipDTO {
     private TypeSector typeSector;
     private String content;
     private Long userId;
+    private String image;
 
 }
