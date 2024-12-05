@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admins/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/entrepreneur/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/entrepreneurShip").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/entrepreneurShip").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/entrepreneurShip/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/publication").permitAll()
                         .requestMatchers(HttpMethod.GET, "/events").permitAll()

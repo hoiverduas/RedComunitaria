@@ -39,13 +39,14 @@ public class EntrepreneurshipService implements IEntrepreneurshipService {
         entrepreneurship.setId(null);
         entrepreneurship.setUsers(user);
         entrepreneurship.setStartDate(LocalDateTime.now());
+        entrepreneurship.setImage(requestEntrepreneurshipDTO.getImage());
 
         entrepreneurshipRepository.save(entrepreneurship);
 
         ResponseEntrepreneurshipDTO responseDTO = mapToDto(entrepreneurship);
         responseDTO.setUserId(userId);
         responseDTO.setStartDate(entrepreneurship.getStartDate());
-
+        responseDTO.setImage(entrepreneurship.getImage());
 
         return responseDTO;
 
@@ -95,9 +96,18 @@ public class EntrepreneurshipService implements IEntrepreneurshipService {
         return dto;
     }
 
-    private Entrepreneurship mapToEntity(RequestEntrepreneurshipDTO requestEntrepreneurshipDTO){
-        return this.modelMapper
-                .map(requestEntrepreneurshipDTO,Entrepreneurship.class);
+    private Entrepreneurship mapToEntity(RequestEntrepreneurshipDTO requestEntrepreneurshipDTO) {
+        Entrepreneurship entrepreneurship = new Entrepreneurship();
+
+        entrepreneurship.setImage(requestEntrepreneurshipDTO.getImage());
+        entrepreneurship.setContent(requestEntrepreneurshipDTO.getContent());
+        entrepreneurship.setReceivedInvestment(requestEntrepreneurshipDTO.getReceivedInvestment());
+        entrepreneurship.setTypeSector(requestEntrepreneurshipDTO.getTypeSector());
+        entrepreneurship.setNameCompany(requestEntrepreneurshipDTO.getNameCompany());
+
+
+        return entrepreneurship;
     }
+
 
 }
