@@ -14,13 +14,13 @@ RUN chmod +x /root/mvnw
 # Descargar las dependencias
 RUN ./mvnw dependency:go-offline
 
+# Copiar el código fuente de la aplicación
 COPY ./src /root/src
 
 # Construir la aplicación
-RUN ./mvnw clean install -DskipTests
-
+RUN ./mvnw package -DskipTests
 # Levantar la aplicación
-ENTRYPOINT ["java", "-jar", "/root/target/redComunitaria-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/root/target/redComunitaria-0.0.1-SNAPSHOT.jar"]
 
 
 
